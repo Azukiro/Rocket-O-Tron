@@ -73,8 +73,7 @@ public class Player : MonoBehaviour
 
         //AddForce & AddTorque
         Vector3 newVelocity = m_Transform.forward * m_translationSpeed*vInput;
-        Vector3 velocityChange = newVelocity - m_Rigidbody.velocity;
-        m_Rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
+        m_Rigidbody.AddForce(newVelocity, ForceMode.VelocityChange);
 
         Vector3 newAngularVelocity = m_Transform.up * m_rotationSpeed *Mathf.Deg2Rad*hInput;
         Vector3 angularVelocityChange = newAngularVelocity - m_Rigidbody.angularVelocity;
