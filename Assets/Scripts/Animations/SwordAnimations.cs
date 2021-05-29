@@ -23,7 +23,7 @@ public class SwordAnimations : MonoBehaviour
      *      Ewen BOUQUET
      * </author>
      **/
-    private bool debug = true;
+    private readonly bool _debug = true;
 
     /**
      * <summary>
@@ -38,7 +38,23 @@ public class SwordAnimations : MonoBehaviour
 
     /**
      * <summary>
-     *      Start the sword rotation
+     *      Particle system
+     * </summary>
+     *
+     * <author>
+     *      Ewen BOUQUET
+     * </author>
+     **/
+    private ParticleSystem _particleSystem;
+
+    private void Start()
+    {
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
+    }
+
+    /**
+     * <summary>
+     *      Start the sword rotation and the particle system
      * </summary>
      *
      * <author>
@@ -58,13 +74,16 @@ public class SwordAnimations : MonoBehaviour
         // Save the coroutine
         _rotationCoroutine = RotateSwordCoroutine();
 
-        // Lauch the coroutine
+        // Launch the coroutine
         StartCoroutine(_rotationCoroutine);
+
+        // Launch the particule system
+        _particleSystem.Play();
     }
 
     /**
      * <summary>
-     *      Stop the sword rotatation
+     *      Stop the sword rotatation and the particle system
      * </summary>
      *
      * <author>
@@ -84,6 +103,9 @@ public class SwordAnimations : MonoBehaviour
         // Stop the active coroutine
         StopCoroutine(_rotationCoroutine);
         _rotationCoroutine = null;
+
+        // Stop the particule system
+        _particleSystem.Stop();
     }
 
     /**
@@ -121,7 +143,7 @@ public class SwordAnimations : MonoBehaviour
     private void OnGUI()
     {
         // Disable on debug
-        if (!debug) return;
+        if (!_debug) return;
 
         // Display the start rotation button
         if (GUI.Button(new Rect(10, 110, 250, 50), "START Rotation"))
