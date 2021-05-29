@@ -16,7 +16,7 @@ public class SwordAnimations : MonoBehaviour
 {
     /**
      * <summary>
-     *      Print debug buttons
+     *      Display debug buttons
      * </summary>
      *
      * <author>
@@ -48,17 +48,17 @@ public class SwordAnimations : MonoBehaviour
 
     public void StartSwordRotation()
     {
-        // Empêcher la duplication de coroutines
+        // Unique coroutine
         if (_rotationCoroutine != null)
         {
             Debug.Log("[StartSwordRotation] Coroutine is already started!");
             return;
         }
 
-        // Stocker la coroutine pour pouvoir l'interrompre par la suite
+        // Save the coroutine
         _rotationCoroutine = RotateSwordCoroutine();
 
-        // Lancer la coroutine de rotation
+        // Lauch the coroutine
         StartCoroutine(_rotationCoroutine);
     }
 
@@ -74,14 +74,14 @@ public class SwordAnimations : MonoBehaviour
 
     public void StopSwordRotation()
     {
-        // On ne fait rien si la coroutine n'est pas lancée
+        // Require an active coroutine
         if (_rotationCoroutine == null)
         {
             Debug.Log("[StopSwordRotation] Coroutine does not exists!");
             return;
         }
 
-        // Interrompre la coroutine de rotation
+        // Stop the active coroutine
         StopCoroutine(_rotationCoroutine);
         _rotationCoroutine = null;
     }
@@ -100,17 +100,17 @@ public class SwordAnimations : MonoBehaviour
     {
         while (true)
         {
-            // Effectuer une rotation de l'épée
+            // Sword rotation
             transform.Rotate(Vector3.right, Time.deltaTime * 500);
 
-            // Attendre la prochaine frame
+            // Wait the next frame
             yield return null;
         }
     }
 
     /**
      * <summary>
-     *      Print debug buttons
+     *      Display some debug buttons
      * </summary>
      *
      * <author>
@@ -120,17 +120,15 @@ public class SwordAnimations : MonoBehaviour
 
     private void OnGUI()
     {
-        if (!debug)
-            return;
+        // Disable on debug
+        if (!debug) return;
 
+        // Display the start rotation button
         if (GUI.Button(new Rect(10, 110, 250, 50), "START Rotation"))
-        {
             StartSwordRotation();
-        }
 
+        // Display the stop rotation button
         if (GUI.Button(new Rect(10, 210, 250, 50), "STOP Rotation"))
-        {
             StopSwordRotation();
-        }
     }
 }
