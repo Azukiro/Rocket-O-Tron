@@ -2,15 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sword : MonoBehaviour
+/**
+ * <summary>
+ *      Manage the sword animations
+ * </summary>
+ *
+ * <author>
+ *      Ewen BOUQUET
+ * </author>
+ **/
+
+public class SwordAnimations : MonoBehaviour
 {
-    private IEnumerator _rotationCoroutine;
+    /**
+     * <summary>
+     *      Print debug buttons
+     * </summary>
+     *
+     * <author>
+     *      Ewen BOUQUET
+     * </author>
+     **/
+    private bool debug = true;
 
-    private void Start()
-    {
-    }
+    /**
+     * <summary>
+     *      Sword rotation coroutine
+     * </summary>
+     *
+     * <author>
+     *      Ewen BOUQUET
+     * </author>
+     **/
+    private IEnumerator _rotationCoroutine = null;
 
-    private void StartSwordRotation()
+    /**
+     * <summary>
+     *      Start the sword rotation
+     * </summary>
+     *
+     * <author>
+     *      Ewen BOUQUET
+     * </author>
+     **/
+
+    public void StartSwordRotation()
     {
         // Empêcher la duplication de coroutines
         if (_rotationCoroutine != null)
@@ -26,7 +62,17 @@ public class Sword : MonoBehaviour
         StartCoroutine(_rotationCoroutine);
     }
 
-    private void StopSwordRotation()
+    /**
+     * <summary>
+     *      Stop the sword rotatation
+     * </summary>
+     *
+     * <author>
+     *      Ewen BOUQUET
+     * </author>
+     **/
+
+    public void StopSwordRotation()
     {
         // On ne fait rien si la coroutine n'est pas lancée
         if (_rotationCoroutine == null)
@@ -40,7 +86,16 @@ public class Sword : MonoBehaviour
         _rotationCoroutine = null;
     }
 
-    // Cette coroutine effectue une rotation infinie de l'épée
+    /**
+     * <summary>
+     *      Rotation coroutine
+     * </summary>
+     *
+     * <author>
+     *      Ewen BOUQUET
+     * </author>
+     **/
+
     private IEnumerator RotateSwordCoroutine()
     {
         while (true)
@@ -53,8 +108,21 @@ public class Sword : MonoBehaviour
         }
     }
 
+    /**
+     * <summary>
+     *      Print debug buttons
+     * </summary>
+     *
+     * <author>
+     *      Ewen BOUQUET
+     * </author>
+     **/
+
     private void OnGUI()
     {
+        if (!debug)
+            return;
+
         if (GUI.Button(new Rect(10, 110, 250, 50), "START Rotation"))
         {
             StartSwordRotation();
