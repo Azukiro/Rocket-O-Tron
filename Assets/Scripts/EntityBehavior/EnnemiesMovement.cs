@@ -8,11 +8,19 @@ public class EnnemiesMovement : MonoBehaviour
 
     private Transform _Transform;
 
+    [Header("Movement")]
     [SerializeField]
     private float _TranslationSpeed;
 
+    [Header("RaycastDetection")]
     [SerializeField]
-    private float _RotationSpeed;
+    private LayerMask _ObjectToDetect;
+
+    [SerializeField]
+    private List<Vector3> _DetectDirections;
+
+    [SerializeField]
+    private int _MaxDetectionDistance;
 
     private void Awake()
     {
@@ -28,7 +36,18 @@ public class EnnemiesMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Wall"))
+        //if (collision.gameObject.CompareTag("Wall"))
+        //{
+        //    if (!makeRotation)
+        //    {
+        //        makeRotation = true;
+        //    }
+        //}
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Wall"))
         {
             if (!makeRotation)
             {
@@ -37,35 +56,41 @@ public class EnnemiesMovement : MonoBehaviour
         }
     }
 
-    //private float oldRotate;
+    private bool PlayerDetect;
 
-    private void FixedUpdate()
+    private void Update()
     {
+        foreach (Vector3 vector in _DetectDirections)
+        {
+            if (Physics.Raycast(new Ray(_Transform.position, _Transform.TransformDirection(vector)), out RaycastHit result, _MaxDetectionDistance, 1 << _ObjectToDetect))
+            {
+                Debug.Log("Detected Player" + result);
+                PlayerDetect = true;
+            }
+        }
+
         if (makeRotation)
         {
             _Transform.rotation *= Quaternion.Euler(0, 180, 0);
 
             makeRotation = false;
-
-            //oldRotate = _Transform.rotation.eulerAngles.y;
-            //Try Smooth Rotation need to be remove
-            /*
-            Vector3 newAngularVelocity = _Rigidbody.transform.up * 1 * Mathf.Deg2Rad * _RotationSpeed;
-            Vector3 angularVelocityChange = newAngularVelocity - _Rigidbody.angularVelocity;
-
-            //Debug.Log(hInput);
-            _Rigidbody.AddTorque(angularVelocityChange, ForceMode.VelocityChange);
-            if (_Transform.rotation.eulerAngles.y >= oldRotate + 180)
-            {
-                Debug.Log(_Transform.rotation.eulerAngles.y);
-
-                Debug.Log(_Transform.rotation.eulerAngles.y - 180 + " 33");
-                _Transform.rotation *= Quaternion.Euler(0, -_Transform.rotation.eulerAngles.y - 180, 0);
-                Debug.Log(_Transform.rotation.eulerAngles.y + "     2");
-                makeRotation = false;
-            }*/
         }
-        else
+    }
+
+    private void OnDrawGizmos()
+    {
+        foreach (Vector3 vector in _DetectDirections)
+        {
+            Gizmos.color = Color.red;
+            Vector3 direction = _Transform.TransformDirection(vector) * _MaxDetectionDistance;
+
+            Gizmos.DrawRay(_Transform.position, direction);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!makeRotation)
         {
             Vector3 newVelocity = _Transform.right * _TranslationSpeed;
             Vector3 velocityChange = newVelocity - _Rigidbody.velocity;
