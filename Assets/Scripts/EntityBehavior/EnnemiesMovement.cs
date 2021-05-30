@@ -22,6 +22,10 @@ public class EnnemiesMovement : MonoBehaviour
     [SerializeField]
     private int _MaxDetectionDistance;
 
+    [Header("Attck")]
+    [SerializeField]
+    private int _Range;
+
     private void Awake()
     {
         _Transform = GetComponent<Transform>();
@@ -34,44 +38,86 @@ public class EnnemiesMovement : MonoBehaviour
 
     private bool makeRotation;
 
+    private float direction = 1;
+
     private void OnCollisionEnter(Collision collision)
     {
-        //if (collision.gameObject.CompareTag("Wall"))
-        //{
-        //    if (!makeRotation)
-        //    {
-        //        makeRotation = true;
-        //    }
-        //}
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            if (!makeRotation)
+            {
+                makeRotation = true;
+                direction *= -1;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Wall"))
         {
+            Debug.Log("Collision" + direction);
             if (!makeRotation)
             {
                 makeRotation = true;
+                direction *= -1;
             }
+            Debug.Log("Collision" + direction);
         }
     }
 
     private bool PlayerDetect;
 
+    private float oldDirection = 1;
+
     private void Update()
     {
+        PlayerDetect = false;
+
         foreach (Vector3 vector in _DetectDirections)
         {
-            if (Physics.Raycast(new Ray(_Transform.position, _Transform.TransformDirection(vector)), out RaycastHit result, _MaxDetectionDistance, 1 << _ObjectToDetect))
+            Vector3 vectorTransform = _Transform.TransformDirection(vector);
+            if (Physics.Raycast(new Ray(_Transform.position, vectorTransform), out RaycastHit result, _MaxDetectionDistance, _ObjectToDetect))
             {
-                Debug.Log("Detected Player" + result);
+                //Debug.Log(Mathf.Abs(_Transform.position.x) + _Range + "Detected Player" + Mathf.Abs(result.transform.position.x));
+                if (Mathf.Abs((result.transform.position.x) - (_Transform.position.x)) <= _Range)
+                {
+                    if (direction != 0)
+                        oldDirection = direction;
+                    direction = 0;
+                }
+                else
+                {
+                    direction = oldDirection;
+                }
+
+                if (result.transform.position.x < _Transform.position.x)
+                {
+                    if (direction == 1)
+                    {
+                        direction *= -1;
+                        makeRotation = true;
+                    }
+                }
+                else
+                {
+                    if (direction == -1)
+                    {
+                        direction *= -1;
+                        makeRotation = true;
+                    }
+                }
                 PlayerDetect = true;
             }
         }
-
+        Debug.Log(PlayerDetect + " " + direction + " " + oldDirection);
+        if (!PlayerDetect && direction == 0)
+        {
+            direction = oldDirection;
+        }
         if (makeRotation)
         {
-            _Transform.rotation *= Quaternion.Euler(0, 180, 0);
+            //_Transform.rotation *= Quaternion.Euler(0, 180, 0);
 
             makeRotation = false;
         }
@@ -79,6 +125,10 @@ public class EnnemiesMovement : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (_Transform == null)
+        {
+            return;
+        }
         foreach (Vector3 vector in _DetectDirections)
         {
             Gizmos.color = Color.red;
@@ -92,7 +142,11 @@ public class EnnemiesMovement : MonoBehaviour
     {
         if (!makeRotation)
         {
-            Vector3 newVelocity = _Transform.right * _TranslationSpeed;
+            Vector3 newVelocity = direction * _Transform.right * _TranslationSpeed;
+            if (PlayerDetect)
+            {
+                newVelocity *= 2;
+            }
             Vector3 velocityChange = newVelocity - _Rigidbody.velocity;
             _Rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
         }
