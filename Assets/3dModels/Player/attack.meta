@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/3dModels/Player/attack.meta
 guid: 893860fe24966634bb25263d9b8addd7
+=======
+guid: e100f0a55eff35245a32f0d08427e9bc
+>>>>>>> lucas:Assets/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

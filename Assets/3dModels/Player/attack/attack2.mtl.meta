@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/3dModels/Player/attack/attack2.mtl.meta
 guid: 303e930c7041f004ca46a749bbdc55b8
+=======
+guid: 8c76f03e32ec7e1458ad04c2de19876c
+>>>>>>> lucas:Assets/Scenes/LucasScene.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
