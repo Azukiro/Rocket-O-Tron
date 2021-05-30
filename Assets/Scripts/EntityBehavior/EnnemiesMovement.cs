@@ -71,6 +71,7 @@ public class EnnemiesMovement : MonoBehaviour
 
         if (makeRotation)
         {
+            //_Transform.rotation = Quaternion.RotateTowards(_Transform.rotation, Quaternion.Euler(0, 180, 0), Time.deltaTime * 1000);
             _Transform.rotation *= Quaternion.Euler(0, 180, 0);
 
             makeRotation = false;
