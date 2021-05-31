@@ -22,7 +22,7 @@ public class ParticlesKillPlayer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //Destroy(other);
+            Destroy(other);
         }
     }
 }
