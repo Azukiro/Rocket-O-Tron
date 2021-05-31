@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnnemiesDetection : MonoBehaviour
+public class EnnemiesDetectionPlatform : MonoBehaviour
 {
     private EnnemiesMovement _movement;
 

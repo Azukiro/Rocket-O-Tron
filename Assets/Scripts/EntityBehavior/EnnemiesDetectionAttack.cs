@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnnemiesDetectionAttck : MonoBehaviour
+public class EnnemiesDetectionAttack : MonoBehaviour
 {
     // Start is called before the first frame update
     private EnnemiesMovement _Movement;
@@ -23,6 +23,8 @@ public class EnnemiesDetectionAttck : MonoBehaviour
     [SerializeField]
     private int _Range;
 
+    public bool CanAttack;
+
     private void Awake()
     {
         _Movement = GetComponent<EnnemiesMovement>();
@@ -41,65 +43,50 @@ public class EnnemiesDetectionAttck : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Trigger Player");
-        }
-    }
-
-    private void Update()
-    {
-        _Movement.PlayerDetect = false;
-
-        foreach (MyRay ray in _DetectDirections)
-        {
-            if (Physics.Raycast(new Ray(_Transform.position + ray.Origin, (ray.Destination)), out RaycastHit result, ray.Range, _ObjectToDetect))
+            if (Mathf.Abs((other.gameObject.transform.position.x) - (_Transform.position.x)) <= _Range)
             {
-                Debug.Log("Collision");
-                if (Mathf.Abs((result.transform.position.x) - (_Transform.position.x)) <= _Range)
-                {
-                    if (_Movement.Direction != 0)
-                        _Movement.OldDirection = _Movement.Direction;
-                    _Movement.Direction = 0;
-                }
+                CanAttack = true;
+                if (_Movement.Direction != 0)
+                    _Movement.OldDirection = _Movement.Direction;
+                _Movement.Direction = 0;
+            }
+            else
+            {
+                CanAttack = false;
+            }
 
-                if (result.transform.position.x < _Transform.position.x)
+            if (other.gameObject.transform.position.x < _Transform.position.x)
+            {
+                if (_Movement.Direction == 1)
                 {
-                    if (_Movement.Direction == 1)
-                    {
-                        _Movement.Direction *= -1;
+                    _Movement.Direction *= -1;
 
-                        _Movement.MakeRotation = true;
-                    }
+                    _Movement.MakeRotation = true;
                 }
-                else
+            }
+            else
+            {
+                if (_Movement.Direction == -1)
                 {
-                    if (_Movement.Direction == -1)
-                    {
-                        _Movement.Direction *= -1;
-                        _Movement.MakeRotation = true;
-                    }
+                    _Movement.Direction *= -1;
+                    _Movement.MakeRotation = true;
                 }
-                _Movement.PlayerDetect = true;
+            }
+            _Movement.PlayerDetect = true;
+
+            if (!_Movement.PlayerDetect && _Movement.Direction == 0)
+            {
+                _Movement.Direction = _Movement.OldDirection;
             }
         }
-
-        if (!_Movement.PlayerDetect && _Movement.Direction == 0)
-        {
-            _Movement.Direction = _Movement.OldDirection;
-        }
     }
 
-    private void OnDrawGizmos()
+    private void OnTriggerExit(Collider other)
     {
-        if (_Transform == null)
+        if (other.gameObject.CompareTag("Player"))
         {
-            return;
-        }
-        foreach (MyRay ray in _DetectDirections)
-        {
-            Gizmos.color = Color.red;
-            Vector3 direction = (ray.Destination) * ray.Range;
-
-            Gizmos.DrawRay((_Transform.position + ray.Origin), direction);
+            _Movement.PlayerDetect = false;
+            CanAttack = false;
         }
     }
 }

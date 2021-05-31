@@ -56,6 +56,7 @@ public class EnnemiesMovement : MonoBehaviour
                 newVelocity *= 2;
             }
             Vector3 velocityChange = newVelocity - _Rigidbody.velocity;
+            Debug.Log(velocityChange);
             _Rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
         }
     }

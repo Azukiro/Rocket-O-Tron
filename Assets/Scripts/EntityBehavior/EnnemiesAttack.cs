@@ -4,15 +4,40 @@ using UnityEngine;
 
 public class EnnemiesAttack : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private EnnemiesDetectionAttack _DetectionAttack;
+
+    [Header("Ball")]
+    [SerializeField]
+    private GameObject _BallPrefab;
+
+    [SerializeField]
+    private float _BallStartVelocity;
+
+    [SerializeField]
+    private float _BallLifeDuration;
+
+    [SerializeField]
+    private float _BallCoolDownDuration;
+
+    private float _BallNextShotTime;
+
+    [SerializeField]
+    private Transform _BallSpawnPosition;
+
+    private void Awake()
     {
-        
+        _DetectionAttack = GetComponent<EnnemiesDetectionAttack>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (_DetectionAttack.CanAttack && _BallNextShotTime < Time.time)
+        {
+            GameObject newBallGo = Instantiate(_BallPrefab);
+            newBallGo.transform.position = _BallSpawnPosition.position;
+            newBallGo.GetComponent<Rigidbody>().velocity = _BallSpawnPosition.forward * _BallStartVelocity;
+            _BallNextShotTime = Time.time + _BallCoolDownDuration;
+            Destroy(newBallGo, _BallLifeDuration);
+        }
     }
 }
