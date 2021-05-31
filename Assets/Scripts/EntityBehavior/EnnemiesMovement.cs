@@ -50,6 +50,11 @@ public class EnnemiesMovement : MonoBehaviour
                 direction *= -1;
             }
         }
+        //Kill player
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(collision.gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -110,7 +115,7 @@ public class EnnemiesMovement : MonoBehaviour
                 PlayerDetect = true;
             }
         }
-        Debug.Log(PlayerDetect + " " + direction + " " + oldDirection);
+        //Debug.Log(PlayerDetect + " " + direction + " " + oldDirection);
         if (!PlayerDetect && direction == 0)
         {
             direction = oldDirection;
@@ -148,6 +153,7 @@ public class EnnemiesMovement : MonoBehaviour
                 newVelocity *= 2;
             }
             Vector3 velocityChange = newVelocity - _Rigidbody.velocity;
+            velocityChange.y = 0;
             _Rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
         }
     }
