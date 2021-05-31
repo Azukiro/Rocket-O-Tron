@@ -22,16 +22,4 @@ public class EnnemiesDetectionPlatform : MonoBehaviour
             }
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Wall"))
-        {
-            if (!_movement.MakeRotation)
-            {
-                _movement.MakeRotation = true;
-                _movement.Direction *= -1;
-            }
-        }
-    }
 }

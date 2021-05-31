@@ -9,20 +9,11 @@ public class EnnemiesDetectionAttack : MonoBehaviour
 
     private Transform _Transform;
 
-    [Header("RaycastDetection")]
-    [SerializeField]
-    private LayerMask _ObjectToDetect;
-
-    [SerializeField]
-    private List<MyRay> _DetectDirections;
-
-    [SerializeField]
-    private int _MaxDetectionDistance;
-
     [Header("Attck")]
     [SerializeField]
     private int _Range;
 
+    [HideInInspector]
     public bool CanAttack;
 
     private void Awake()
@@ -41,6 +32,10 @@ public class EnnemiesDetectionAttack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
         if (other.gameObject.CompareTag("Player"))
         {
             if (Mathf.Abs((other.gameObject.transform.position.x) - (_Transform.position.x)) <= _Range)
@@ -53,12 +48,18 @@ public class EnnemiesDetectionAttack : MonoBehaviour
             else
             {
                 CanAttack = false;
+                if (_Movement.Direction == 0)
+                {
+                    _Movement.Direction = _Movement.OldDirection;
+                }
             }
 
+            Debug.Log(other.gameObject.transform.position.x + " " + _Transform.position.x + " " + _Movement.Direction);
             if (other.gameObject.transform.position.x < _Transform.position.x)
             {
                 if (_Movement.Direction == 1)
                 {
+                    Debug.Log("Movement Left");
                     _Movement.Direction *= -1;
 
                     _Movement.MakeRotation = true;
@@ -68,16 +69,12 @@ public class EnnemiesDetectionAttack : MonoBehaviour
             {
                 if (_Movement.Direction == -1)
                 {
+                    Debug.Log("Movement Right");
                     _Movement.Direction *= -1;
                     _Movement.MakeRotation = true;
                 }
             }
             _Movement.PlayerDetect = true;
-
-            if (!_Movement.PlayerDetect && _Movement.Direction == 0)
-            {
-                _Movement.Direction = _Movement.OldDirection;
-            }
         }
     }
 
