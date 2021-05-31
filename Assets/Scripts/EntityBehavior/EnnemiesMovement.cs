@@ -18,17 +18,24 @@ public class EnnemiesMovement : MonoBehaviour
 
     private Transform _Transform;
 
+    [HideInInspector]
     public bool MakeRotation;
 
+    [HideInInspector]
     public float Direction = 1;
 
+    [HideInInspector]
     public bool PlayerDetect;
 
+    [HideInInspector]
     public float OldDirection = 1;
 
     [Header("Movement")]
     [SerializeField]
     private float _TranslationSpeed;
+
+    [SerializeField]
+    private float _Acceleration;
 
     private void Awake()
     {
@@ -53,7 +60,7 @@ public class EnnemiesMovement : MonoBehaviour
             Vector3 newVelocity = Direction * _Transform.right * _TranslationSpeed;
             if (PlayerDetect)
             {
-                newVelocity *= 2;
+                newVelocity *= _Acceleration;
             }
             Vector3 velocityChange = newVelocity - _Rigidbody.velocity;
             _Rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
