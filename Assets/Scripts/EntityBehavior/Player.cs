@@ -161,11 +161,11 @@ public class Player : MonoBehaviour
     {
         float direction = collision.transform.position.x - transform.position.x;
 
-        if (collision.gameObject.transform.CompareTag("Ground") && collision.gameObject.transform.position.y < _Transform.position.y)
+        if (collision.gameObject.transform.parent.CompareTag("Ground") && collision.gameObject.transform.position.y < _Transform.position.y)
         {
             isGrounded = true;
         }
-        if (collision.gameObject.transform.CompareTag("Wall") && !velocityChange.Equals(Vector3.zero))
+        if (collision.gameObject.transform.parent.CompareTag("Wall") && !velocityChange.Equals(Vector3.zero))
         {
             //Debug.Log("enter");
             if (direction > 0)
@@ -179,7 +179,7 @@ public class Player : MonoBehaviour
     {
         float direction = collision.transform.position.x - transform.position.x;
         bool stay = false;
-        if (collision.gameObject.transform.CompareTag("Wall") && !velocityChange.Equals(Vector3.zero) && !isGrounded)
+        if (collision.gameObject.transform.parent.CompareTag("Wall") && !velocityChange.Equals(Vector3.zero) && !isGrounded)
         {
             //Debug.Log("stay");
             stay = true;
@@ -196,7 +196,7 @@ public class Player : MonoBehaviour
 
             //Debug.Log("jumpCollision 0");
         }
-        if (collision.gameObject.transform.CompareTag("Ground") && collision.gameObject.transform.position.y < _Transform.position.y)
+        if (collision.gameObject.transform.parent.CompareTag("Ground") && collision.gameObject.transform.position.y < _Transform.position.y)
         {
             isGrounded = true;
         }
@@ -204,11 +204,11 @@ public class Player : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.transform.CompareTag("Ground"))
+        if (collision.gameObject.transform.parent.CompareTag("Ground"))
         {
             isGrounded = false;
         }
-        if (collision.gameObject.transform.CompareTag("Wall"))
+        if (collision.gameObject.transform.parent.CompareTag("Wall"))
         {
             jumpCollision = 0;
 
