@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 1146873}
   - component: {fileID: 1146872}
   - component: {fileID: 1146871}
-  - component: {fileID: 1146874}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -155,6 +154,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _TranslationSpeed: 1.79
+  _ObjectToDetect:
+    serializedVersion: 2
+    m_Bits: 64
+  _DetectDirections:
+  - {x: 1, y: 0, z: 0}
+  - {x: -1, y: 0, z: 0}
+  _MaxDetectionDistance: 5
+  _Range: 2
 --- !u!54 &1146872
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -186,25 +193,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1146874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1146870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5ba2f6b3aaf616418612984ac030855, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ObjectToDetect:
-    serializedVersion: 2
-    m_Bits: 64
-  _DetectDirections:
-  - {x: 1, y: 0, z: 0}
-  - {x: -1, y: 0, z: 0}
-  _MaxDetectionDistance: 5
 --- !u!1 &396228417
 GameObject:
   m_ObjectHideFlags: 0
@@ -5436,7 +5424,7 @@ GameObject:
   - component: {fileID: 1243449882}
   - component: {fileID: 1243449881}
   - component: {fileID: 1243449880}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -5700,8 +5688,16 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e9d691e412819e54e85b27959af8f2b2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e9d691e412819e54e85b27959af8f2b2, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: e9d691e412819e54e85b27959af8f2b2, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9d691e412819e54e85b27959af8f2b2, type: 3}
