@@ -99,15 +99,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 1.1666666
         value: {x: -61.858, y: -1.27, z: -11.577}
-        inSlope: {x: -117.77913, y: 0, z: 0}
-        outSlope: {x: -117.77913, y: 0, z: 0}
+        inSlope: {x: -136.99286, y: 0, z: 0}
+        outSlope: {x: -136.99286, y: 0, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 1.3333334
-        value: {x: -122.936005, y: 0, z: 0}
+        value: {x: -145.352, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -531,9 +531,9 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 1.3333334
-        value: {x: 1.558, y: 0, z: 0}
-        inSlope: {x: 4.1546664, y: 0, z: 0}
-        outSlope: {x: 4.1546664, y: 0, z: 0}
+        value: {x: -0.889, y: -24.844, z: -0.655}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
@@ -951,15 +951,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 1.1666666
         value: -61.858
-        inSlope: -117.77913
-        outSlope: -117.77913
+        inSlope: -136.99286
+        outSlope: -136.99286
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.3333334
-        value: -122.936005
+        value: -145.352
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -2303,9 +2303,9 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.3333334
-        value: 1.558
-        inSlope: 4.1546664
-        outSlope: 4.1546664
+        value: -0.889
+        inSlope: 0
+        outSlope: 0
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -2349,7 +2349,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.3333334
-        value: 0
+        value: -24.844
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -2395,7 +2395,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.3333334
-        value: 0
+        value: -0.655
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -2741,7 +2741,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: body/LeftArm
+    path: body
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2751,7 +2751,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: body/LeftArm
+    path: body
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2761,7 +2761,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: body/LeftArm
+    path: body
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2861,7 +2861,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: body
+    path: body/LeftArm/sword
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2871,7 +2871,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: body
+    path: body/LeftArm/sword
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2881,7 +2881,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: body
+    path: body/LeftArm/sword
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2921,7 +2921,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: body/LeftArm/sword
+    path: body/LeftArm
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2931,7 +2931,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: body/LeftArm/sword
+    path: body/LeftArm
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2941,7 +2941,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: body/LeftArm/sword
+    path: body/LeftArm
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0
