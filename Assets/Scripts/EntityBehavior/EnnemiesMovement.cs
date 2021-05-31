@@ -2,6 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class MyRay
+{
+    public Vector3 Origin;
+
+    public Vector3 Destination;
+
+    public float Range;
+}
+
 public class EnnemiesMovement : MonoBehaviour
 {
     private Rigidbody _Rigidbody;
@@ -17,7 +27,7 @@ public class EnnemiesMovement : MonoBehaviour
     private LayerMask _ObjectToDetect;
 
     [SerializeField]
-    private List<Vector3> _DetectDirections;
+    private List<MyRay> _DetectDirections;
 
     [SerializeField]
     private int _MaxDetectionDistance;
@@ -50,19 +60,26 @@ public class EnnemiesMovement : MonoBehaviour
                 direction *= -1;
             }
         }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(collision.gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Wall"))
         {
-            Debug.Log("Collision" + direction);
             if (!makeRotation)
             {
                 makeRotation = true;
                 direction *= -1;
             }
-            Debug.Log("Collision" + direction);
+        }
+        else if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Trigger Player");
         }
     }
 
@@ -74,21 +91,16 @@ public class EnnemiesMovement : MonoBehaviour
     {
         PlayerDetect = false;
 
-        foreach (Vector3 vector in _DetectDirections)
+        foreach (MyRay ray in _DetectDirections)
         {
-            Vector3 vectorTransform = _Transform.TransformDirection(vector);
-            if (Physics.Raycast(new Ray(_Transform.position, vectorTransform), out RaycastHit result, _MaxDetectionDistance, _ObjectToDetect))
+            if (Physics.Raycast(new Ray(_Transform.position + ray.Origin, (ray.Destination)), out RaycastHit result, ray.Range, _ObjectToDetect))
             {
-                //Debug.Log(Mathf.Abs(_Transform.position.x) + _Range + "Detected Player" + Mathf.Abs(result.transform.position.x));
+                Debug.Log("Collision");
                 if (Mathf.Abs((result.transform.position.x) - (_Transform.position.x)) <= _Range)
                 {
                     if (direction != 0)
                         oldDirection = direction;
                     direction = 0;
-                }
-                else
-                {
-                    direction = oldDirection;
                 }
 
                 if (result.transform.position.x < _Transform.position.x)
@@ -96,6 +108,7 @@ public class EnnemiesMovement : MonoBehaviour
                     if (direction == 1)
                     {
                         direction *= -1;
+
                         makeRotation = true;
                     }
                 }
@@ -110,14 +123,14 @@ public class EnnemiesMovement : MonoBehaviour
                 PlayerDetect = true;
             }
         }
-        Debug.Log(PlayerDetect + " " + direction + " " + oldDirection);
+
         if (!PlayerDetect && direction == 0)
         {
             direction = oldDirection;
         }
         if (makeRotation)
         {
-            //_Transform.rotation *= Quaternion.Euler(0, 180, 0);
+            _Transform.GetChild(0).rotation *= Quaternion.Euler(0, 180, 0);
 
             makeRotation = false;
         }
@@ -129,12 +142,12 @@ public class EnnemiesMovement : MonoBehaviour
         {
             return;
         }
-        foreach (Vector3 vector in _DetectDirections)
+        foreach (MyRay ray in _DetectDirections)
         {
             Gizmos.color = Color.red;
-            Vector3 direction = _Transform.TransformDirection(vector) * _MaxDetectionDistance;
+            Vector3 direction = (ray.Destination) * ray.Range;
 
-            Gizmos.DrawRay(_Transform.position, direction);
+            Gizmos.DrawRay((_Transform.position + ray.Origin), direction);
         }
     }
 
