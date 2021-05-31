@@ -885,15 +885,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2015ba3726ed37348a88b27b28a95b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MakeRotation: 0
+  Direction: 1
+  PlayerDetect: 0
+  OldDirection: 1
   _TranslationSpeed: 1.79
-  _ObjectToDetect:
-    serializedVersion: 2
-    m_Bits: 64
-  _DetectDirections:
-  - {x: 1, y: 0, z: 0}
-  - {x: -1, y: 0, z: 0}
-  _MaxDetectionDistance: 5
-  _Range: 1
 --- !u!1001 &629152211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1137,7 +1133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &709540812
 Transform:
   m_ObjectHideFlags: 0
