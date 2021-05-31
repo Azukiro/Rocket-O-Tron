@@ -12,21 +12,29 @@ public class Player : MonoBehaviour
     [SerializeField] private float _TranslationSpeed;
 
     [SerializeField] private float _JumpSpeed;
+
     [SerializeField] private bool isGrounded;
 
     /**
      * Component variables
     **/
+
     private Rigidbody _Rigidbody;
+
     private Transform _Transform;
+
     private Animator _animator;
 
     /**
      * Local variables
     **/
+
     private float lastDirection;
+
     private Vector3 velocityChange;
+
     private int jumpCollision;
+
     private bool isJumping;
 
     // Start is called before the first frame update
@@ -152,11 +160,12 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         float direction = collision.transform.position.x - transform.position.x;
-        if (collision.gameObject.transform.parent.CompareTag("Ground") && collision.gameObject.transform.position.y < _Transform.position.y)
+
+        if (collision.gameObject.transform.CompareTag("Ground") && collision.gameObject.transform.position.y < _Transform.position.y)
         {
             isGrounded = true;
         }
-        if (collision.gameObject.transform.parent.CompareTag("Wall") && !velocityChange.Equals(Vector3.zero))
+        if (collision.gameObject.transform.CompareTag("Wall") && !velocityChange.Equals(Vector3.zero))
         {
             //Debug.Log("enter");
             if (direction > 0)
@@ -170,7 +179,7 @@ public class Player : MonoBehaviour
     {
         float direction = collision.transform.position.x - transform.position.x;
         bool stay = false;
-        if (collision.gameObject.transform.parent.CompareTag("Wall") && !velocityChange.Equals(Vector3.zero) && !isGrounded)
+        if (collision.gameObject.transform.CompareTag("Wall") && !velocityChange.Equals(Vector3.zero) && !isGrounded)
         {
             //Debug.Log("stay");
             stay = true;
@@ -184,9 +193,10 @@ public class Player : MonoBehaviour
             if (jumpCollision == -1) { transform.position += new Vector3(0.1f, 0, 0); }
             if (jumpCollision == 1) { transform.position += new Vector3(-0.1f, 0, 0); }
             jumpCollision = 0;
+
             //Debug.Log("jumpCollision 0");
         }
-        if (collision.gameObject.transform.parent.CompareTag("Ground") && collision.gameObject.transform.position.y < _Transform.position.y)
+        if (collision.gameObject.transform.CompareTag("Ground") && collision.gameObject.transform.position.y < _Transform.position.y)
         {
             isGrounded = true;
         }
@@ -194,13 +204,14 @@ public class Player : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.transform.parent.CompareTag("Ground"))
+        if (collision.gameObject.transform.CompareTag("Ground"))
         {
             isGrounded = false;
         }
-        if (collision.gameObject.transform.parent.CompareTag("Wall"))
+        if (collision.gameObject.transform.CompareTag("Wall"))
         {
             jumpCollision = 0;
+
             //Debug.Log("exit");
         }
     }

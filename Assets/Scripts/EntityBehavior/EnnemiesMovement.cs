@@ -14,9 +14,15 @@ public class MyRay
 
 public class EnnemiesMovement : MonoBehaviour
 {
+    #region PrivateFields
+
     private Rigidbody _Rigidbody;
 
     private Transform _Transform;
+
+    #endregion PrivateFields
+
+    #region PublicHideProperties
 
     [HideInInspector]
     public bool MakeRotation;
@@ -30,12 +36,20 @@ public class EnnemiesMovement : MonoBehaviour
     [HideInInspector]
     public float OldDirection = 1;
 
+    #endregion PublicHideProperties
+
+    #region PrivateSerializeFields
+
     [Header("Movement")]
     [SerializeField]
     private float _TranslationSpeed;
 
     [SerializeField]
     private float _Acceleration;
+
+    #endregion PrivateSerializeFields
+
+    #region UnityMethods
 
     private void Awake()
     {
@@ -47,7 +61,7 @@ public class EnnemiesMovement : MonoBehaviour
     {
         if (MakeRotation)
         {
-            _Transform.GetChild(0).rotation *= Quaternion.Euler(0, 180, 0);
+            _Transform.GetChild(0).rotation *= Quaternion.Euler(0, 180, 0);//Rotate Gfx
 
             MakeRotation = false;
         }
@@ -58,7 +72,7 @@ public class EnnemiesMovement : MonoBehaviour
         if (!MakeRotation)
         {
             Vector3 newVelocity = Direction * _Transform.right * _TranslationSpeed;
-            if (PlayerDetect)
+            if (PlayerDetect)//Accelerate is player detected
             {
                 newVelocity *= _Acceleration;
             }
@@ -66,4 +80,6 @@ public class EnnemiesMovement : MonoBehaviour
             _Rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
         }
     }
+
+    #endregion UnityMethods
 }

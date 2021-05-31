@@ -4,17 +4,29 @@ using UnityEngine;
 
 public class EnnemiesDetectionAttack : MonoBehaviour
 {
-    // Start is called before the first frame update
+    #region PrivateFields
+
     private EnnemiesMovement _Movement;
 
     private Transform _Transform;
 
-    [Header("Attck")]
-    [SerializeField]
-    private int _Range;
+    #endregion PrivateFields
+
+    #region PublicHideProperties
 
     [HideInInspector]
     public bool CanAttack;
+
+    #endregion PublicHideProperties
+
+    #region PrivateSerializeFields
+
+    [SerializeField]
+    private int _Range;
+
+    #endregion PrivateSerializeFields
+
+    #region UnityMethods
 
     private void Awake()
     {
@@ -30,14 +42,11 @@ public class EnnemiesDetectionAttack : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-    }
-
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            //If Player in range prepare to attack
             if (Mathf.Abs((other.gameObject.transform.position.x) - (_Transform.position.x)) <= _Range)
             {
                 CanAttack = true;
@@ -47,6 +56,7 @@ public class EnnemiesDetectionAttack : MonoBehaviour
             }
             else
             {
+                //Reset CanAttack and enabled movement
                 CanAttack = false;
                 if (_Movement.Direction == 0)
                 {
@@ -54,22 +64,20 @@ public class EnnemiesDetectionAttack : MonoBehaviour
                 }
             }
 
-            Debug.Log(other.gameObject.transform.position.x + " " + _Transform.position.x + " " + _Movement.Direction);
+            //If Player left and back of ennemy rotate ennemy
             if (other.gameObject.transform.position.x < _Transform.position.x)
             {
                 if (_Movement.Direction == 1)
                 {
-                    Debug.Log("Movement Left");
                     _Movement.Direction *= -1;
-
                     _Movement.MakeRotation = true;
                 }
             }
             else
             {
+                //If Player right and back of ennemy rotate ennemy
                 if (_Movement.Direction == -1)
                 {
-                    Debug.Log("Movement Right");
                     _Movement.Direction *= -1;
                     _Movement.MakeRotation = true;
                 }
@@ -80,10 +88,12 @@ public class EnnemiesDetectionAttack : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))//Reset playerDetectionField
         {
             _Movement.PlayerDetect = false;
             CanAttack = false;
         }
     }
+
+    #endregion UnityMethods
 }

@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class EnnemiesAttackRange : MonoBehaviour
 {
+    #region PrivateFields
+
     private EnnemiesDetectionAttack _DetectionAttack;
+
+    private float _BallNextShotTime;
+
+    #endregion PrivateFields
+
+    #region PrivateSerializeFields
 
     [Header("Ball")]
     [SerializeField]
@@ -19,10 +27,12 @@ public class EnnemiesAttackRange : MonoBehaviour
     [SerializeField]
     private float _BallCoolDownDuration;
 
-    private float _BallNextShotTime;
-
     [SerializeField]
     private Transform _BallSpawnPosition;
+
+    #endregion PrivateSerializeFields
+
+    #region UnityMethods
 
     private void Awake()
     {
@@ -40,4 +50,6 @@ public class EnnemiesAttackRange : MonoBehaviour
             Destroy(newBallGo, _BallLifeDuration);
         }
     }
+
+    #endregion UnityMethods
 }
