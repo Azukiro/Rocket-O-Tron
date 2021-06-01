@@ -26,7 +26,7 @@ public class EnnemiesDetectionAttack : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
         }
     }
 
@@ -54,12 +54,12 @@ public class EnnemiesDetectionAttack : MonoBehaviour
                 }
             }
 
-            Debug.Log(other.gameObject.transform.position.x + " " + _Transform.position.x + " " + _Movement.Direction);
+            //Debug.Log(other.gameObject.transform.position.x + " " + _Transform.position.x + " " + _Movement.Direction);
             if (other.gameObject.transform.position.x < _Transform.position.x)
             {
                 if (_Movement.Direction == 1)
                 {
-                    Debug.Log("Movement Left");
+                    //Debug.Log("Movement Left");
                     _Movement.Direction *= -1;
 
                     _Movement.MakeRotation = true;
@@ -69,7 +69,7 @@ public class EnnemiesDetectionAttack : MonoBehaviour
             {
                 if (_Movement.Direction == -1)
                 {
-                    Debug.Log("Movement Right");
+                    //Debug.Log("Movement Right");
                     _Movement.Direction *= -1;
                     _Movement.MakeRotation = true;
                 }

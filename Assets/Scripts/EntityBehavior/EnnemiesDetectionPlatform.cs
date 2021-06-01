@@ -13,7 +13,7 @@ public class EnnemiesDetectionPlatform : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.transform.parent != null && collision.gameObject.transform.parent.CompareTag("Wall"))
         {
             if (!_movement.MakeRotation)
             {
