@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class WeaponBehaviour : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject holder;
+    public GameObject Holder;
 
     private void OnTriggerEnter(Collider other)
     {
+        if (Holder == null)
+        {
+            return;
+        }
+
         //IF PLAYER ATTACKS
-        if (holder.CompareTag("Player") && holder.GetComponent<Player>().CanAttack) {
+        if (Holder.CompareTag("Player") && Holder.GetComponent<Player>().CanAttack)
+        {
             //Debug.Log("triggerenter");
             /*
             if (other.gameObject.CompareTag("Weapon") && holder.CompareTag("Player"))
@@ -31,12 +36,12 @@ public class WeaponBehaviour : MonoBehaviour
             {
                 other.gameObject.GetComponent<LivingEntity>().Damage(1);
                 Debug.DrawLine(other.transform.position, -other.transform.GetChild(0).forward * 100, Color.red);
-                other.GetComponent<Rigidbody>().AddForce(-other.transform.forward*100,ForceMode.Impulse);
+                other.GetComponent<Rigidbody>().AddForce(-other.transform.forward * 100, ForceMode.Impulse);
             }
         }
 
         //IF ENEMY ATTACKS
-        if (holder.CompareTag("Enemy"))
+        if (Holder.CompareTag("Enemy"))
         {
             if (other.gameObject.CompareTag("Player") && other.isTrigger == false && !other.gameObject.GetComponent<Player>().IsBlocking)
             {

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnnemiesDetectionAttack : MonoBehaviour
+public class EnemyDetectionAttack : MonoBehaviour
 {
     #region PrivateFields
 
-    private EnnemiesMovement _Movement;
+    private EnemyMovement _Movement;
 
     private Transform _Transform;
 
@@ -30,7 +30,7 @@ public class EnnemiesDetectionAttack : MonoBehaviour
 
     private void Awake()
     {
-        _Movement = GetComponent<EnnemiesMovement>();
+        _Movement = GetComponent<EnemyMovement>();
         _Transform = GetComponent<Transform>();
     }
 
@@ -38,7 +38,7 @@ public class EnnemiesDetectionAttack : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
         }
     }
 
@@ -46,6 +46,8 @@ public class EnnemiesDetectionAttack : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Player" + _Movement.Direction + " " + _Movement.OldDirection);
+
             //If Player in range prepare to attack
             if (Mathf.Abs((other.gameObject.transform.position.x) - (_Transform.position.x)) <= _Range)
             {

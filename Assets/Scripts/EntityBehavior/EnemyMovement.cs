@@ -12,7 +12,7 @@ public class MyRay
     public float Range;
 }
 
-public class EnnemiesMovement : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
     #region PrivateFields
 
@@ -57,6 +57,11 @@ public class EnnemiesMovement : MonoBehaviour
         _Rigidbody = GetComponent<Rigidbody>();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject.name);
+    }
+
     private void Update()
     {
         if (MakeRotation)
@@ -76,7 +81,11 @@ public class EnnemiesMovement : MonoBehaviour
             {
                 newVelocity *= _Acceleration;
             }
+
             Vector3 velocityChange = newVelocity - _Rigidbody.velocity;
+            velocityChange.y = 0;
+
+            //Debug.Log("newVelocity" + velocityChange);
             _Rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
         }
     }

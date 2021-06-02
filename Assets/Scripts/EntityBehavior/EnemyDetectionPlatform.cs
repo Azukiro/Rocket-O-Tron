@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnnemiesDetectionPlatform : MonoBehaviour
+public class EnemyDetectionPlatform : MonoBehaviour
 {
     #region PrivateFields
 
-    private EnnemiesMovement _Movement;
+    private EnemyMovement _Movement;
 
     private Transform _Transform;
 
@@ -33,7 +33,7 @@ public class EnnemiesDetectionPlatform : MonoBehaviour
 
     private void Awake()
     {
-        _Movement = GetComponent<EnnemiesMovement>();
+        _Movement = GetComponent<EnemyMovement>();
         _Transform = GetComponent<Transform>();
         _Collider = GetComponent<Collider>();
     }
@@ -46,6 +46,7 @@ public class EnnemiesDetectionPlatform : MonoBehaviour
         {
             if (isGrounded)
             {
+                Debug.Log("No Ground" + _Movement.Direction + " " + _Movement.OldDirection);
                 _Movement.Direction *= -1;
                 _Movement.MakeRotation = true;
                 isGrounded = false;
@@ -61,6 +62,7 @@ public class EnnemiesDetectionPlatform : MonoBehaviour
         {
             if (_Movement.Direction == 1)
             {
+                Debug.Log("Wall Right" + _Movement.Direction + " " + _Movement.OldDirection);
                 _Movement.Direction *= -1;
 
                 _Movement.MakeRotation = true;
@@ -72,6 +74,7 @@ public class EnnemiesDetectionPlatform : MonoBehaviour
         {
             if (_Movement.Direction == -1)
             {
+                Debug.Log("Wall Left" + _Movement.Direction + " " + _Movement.OldDirection);
                 _Movement.Direction *= -1;
                 _Movement.MakeRotation = true;
             }
@@ -91,8 +94,8 @@ public class EnnemiesDetectionPlatform : MonoBehaviour
 
         Gizmos.DrawRay(downPosition, direction);
 
-        Gizmos.DrawRay(_Transform.position, Vector3.left * 1f);
-        Gizmos.DrawRay(_Transform.position, Vector3.right * 1f);
+        Gizmos.DrawRay(_Transform.position, Vector3.left * _RaycastRange);
+        Gizmos.DrawRay(_Transform.position, Vector3.right * _RaycastRange);
     }
 
     #endregion UnityMethods
