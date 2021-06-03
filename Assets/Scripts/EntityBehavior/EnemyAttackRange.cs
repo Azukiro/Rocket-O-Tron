@@ -39,28 +39,28 @@ public class EnemyAttackRange : MonoBehaviour
         _DetectionAttack = GetComponent<EnemyDetectionAttack>();
     }
 
+    public Transform target;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            target = other.transform;
+        }
+    }
+
     private void Update()
     {
         if (_DetectionAttack.CanAttack && _BallNextShotTime < Time.time)
         {
             GameObject newBallGo = Instantiate(_BallPrefab);
             newBallGo.transform.position = _BallSpawnPosition.position;
-            newBallGo.GetComponent<Rigidbody>().velocity = _BallSpawnPosition.right * _BallStartVelocity;
+            newBallGo.GetComponent<Projectile>().Target = target;
             newBallGo.GetComponent<WeaponBehaviour>().Holder = gameObject;
-            Vector3.Slerp(gameObject.transform.forward, newBallGo.GetComponent<Rigidbody>().velocity.normalized, Time.deltaTime * 2);
-
-            //Debug.Log(newBallGo.transform.position + " " + _BallSpawnPosition.position);
             _BallNextShotTime = Time.time + _BallCoolDownDuration;
 
             Destroy(newBallGo, _BallLifeDuration);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-
-        Gizmos.DrawRay(_BallSpawnPosition.position, _BallSpawnPosition.right * _BallStartVelocity);
     }
 
     #endregion UnityMethods

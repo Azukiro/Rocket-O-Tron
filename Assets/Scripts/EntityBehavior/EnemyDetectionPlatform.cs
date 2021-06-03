@@ -46,7 +46,6 @@ public class EnemyDetectionPlatform : MonoBehaviour
         {
             if (isGrounded)
             {
-                Debug.Log("No Ground" + _Movement.Direction + " " + _Movement.OldDirection);
                 _Movement.Direction *= -1;
                 _Movement.MakeRotation = true;
                 isGrounded = false;
@@ -62,7 +61,6 @@ public class EnemyDetectionPlatform : MonoBehaviour
         {
             if (_Movement.Direction == 1)
             {
-                Debug.Log("Wall Right" + _Movement.Direction + " " + _Movement.OldDirection);
                 _Movement.Direction *= -1;
 
                 _Movement.MakeRotation = true;
@@ -74,7 +72,6 @@ public class EnemyDetectionPlatform : MonoBehaviour
         {
             if (_Movement.Direction == -1)
             {
-                Debug.Log("Wall Left" + _Movement.Direction + " " + _Movement.OldDirection);
                 _Movement.Direction *= -1;
                 _Movement.MakeRotation = true;
             }

@@ -31,10 +31,10 @@ public class EnemyMovement : MonoBehaviour
     public float Direction = 1;
 
     [HideInInspector]
-    public bool PlayerDetect;
+    public bool Freeze = false;
 
     [HideInInspector]
-    public float OldDirection = 1;
+    public bool PlayerDetect;
 
     #endregion PublicHideProperties
 
@@ -57,24 +57,18 @@ public class EnemyMovement : MonoBehaviour
         _Rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision.gameObject.name);
-    }
-
     private void Update()
     {
         if (MakeRotation)
         {
             _Transform.GetChild(0).rotation *= Quaternion.Euler(0, 180, 0);//Rotate Gfx
-
             MakeRotation = false;
         }
     }
 
     private void FixedUpdate()
     {
-        if (!MakeRotation)
+        if (!MakeRotation && !Freeze)
         {
             Vector3 newVelocity = Direction * _Transform.right * _TranslationSpeed;
             if (PlayerDetect)//Accelerate is player detected
@@ -85,7 +79,6 @@ public class EnemyMovement : MonoBehaviour
             Vector3 velocityChange = newVelocity - _Rigidbody.velocity;
             velocityChange.y = 0;
 
-            //Debug.Log("newVelocity" + velocityChange);
             _Rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
         }
     }
