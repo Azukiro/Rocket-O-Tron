@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("StopCorouTrigger");
+        Debug.Log("StopCorouTrigger" + gameObject.name);
         StopAllCoroutines();
         Destroy(gameObject);
     }
