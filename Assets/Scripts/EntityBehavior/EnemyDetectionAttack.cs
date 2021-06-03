@@ -46,23 +46,19 @@ public class EnemyDetectionAttack : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player" + _Movement.Direction + " " + _Movement.OldDirection);
-
             //If Player in range prepare to attack
             if (Mathf.Abs((other.gameObject.transform.position.x) - (_Transform.position.x)) <= _Range)
             {
                 CanAttack = true;
-                if (_Movement.Direction != 0)
-                    _Movement.OldDirection = _Movement.Direction;
-                _Movement.Direction = 0;
+                _Movement.Freeze = true;
             }
             else
             {
                 //Reset CanAttack and enabled movement
                 CanAttack = false;
-                if (_Movement.Direction == 0)
+                if (_Movement.Freeze)
                 {
-                    _Movement.Direction = _Movement.OldDirection;
+                    _Movement.Freeze = false; ;
                 }
             }
 
@@ -71,6 +67,7 @@ public class EnemyDetectionAttack : MonoBehaviour
             {
                 if (_Movement.Direction == 1)
                 {
+                    Debug.Log("Left");
                     _Movement.Direction *= -1;
                     _Movement.MakeRotation = true;
                 }
@@ -80,6 +77,7 @@ public class EnemyDetectionAttack : MonoBehaviour
                 //If Player right and back of ennemy rotate ennemy
                 if (_Movement.Direction == -1)
                 {
+                    Debug.Log("Right");
                     _Movement.Direction *= -1;
                     _Movement.MakeRotation = true;
                 }
