@@ -133,7 +133,10 @@ public class Player : MonoBehaviour
 
         //  - Update IsAttackingBig to raise a big attack animation
         if (fire2Input != 0)
+        {
             SetAndUnsetAfterMillis("IsAttackingBig");
+            AudioManager.instance.Play("Sncf");
+        }
 
         //  - Update IsBlocking to raise a defense animation
         if (fire3Input != 0)
