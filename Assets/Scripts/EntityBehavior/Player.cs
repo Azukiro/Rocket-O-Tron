@@ -12,9 +12,15 @@ public class Player : MonoBehaviour
     [SerializeField] private float _TranslationSpeed;
 
     [SerializeField] private float _JumpSpeed;
-    [SerializeField] private bool isGrounded;
-    [SerializeField] public bool CanAttack;
-    [SerializeField] public bool IsBlocking;
+
+    /**
+     * States variables
+    **/
+    private Dictionary<string, bool> states = new Dictionary<string, bool>();
+    public bool IsGrounded { get => states["IsGrounded"]; private set => states["IsGrounded"] = value; }
+    public bool CanAttack { get => states["CanAttack"]; private set => states["CanAttack"] = value; }
+    public bool IsBlocking { get => states["IsBlocking"]; private set => states["IsBlocking"] = value; }
+    public bool IsJumping { get => states["IsJumping"]; private set => states["IsJumping"] = value; }
 
     /**
      * Component variables
@@ -29,7 +35,6 @@ public class Player : MonoBehaviour
     private float lastDirection;
     private Vector3 velocityChange;
     private int jumpCollision;
-    private bool isJumping;
 
     // Start is called before the first frame update
     private void Start()
@@ -41,8 +46,10 @@ public class Player : MonoBehaviour
 
         // Init local variables
         lastDirection = 1;
+        IsGrounded = false;
         CanAttack = false;
         IsBlocking = false;
+        IsJumping = false;
     }
 
     private void FixedUpdate()
@@ -65,7 +72,7 @@ public class Player : MonoBehaviour
         }
 
         // Jump the Player
-        if (isGrounded && jumpInput != 0)
+        if (IsGrounded && jumpInput != 0)
         {
             Vector3 newJumpVelocity = _Transform.up * _JumpSpeed * jumpInput;
             _Rigidbody.AddForce(newJumpVelocity, ForceMode.Impulse);
@@ -100,59 +107,53 @@ public class Player : MonoBehaviour
         _animator.SetFloat("Speed", xSpeed);
 
         //  - Update IsJumping to raise / stop a jump animation
-        if (isGrounded)
+        if (IsGrounded)
         {
             // End of a jump
-            if (isJumping)
+            if (IsJumping)
             {
-                isJumping = false;
-                _animator.SetBool("IsJumping", isJumping);
+                IsJumping = false;
+                _animator.SetBool("IsJumping", IsJumping);
             }
 
             // Start of a jump
             if (jumpInput != 0)
             {
-                isJumping = true;
-                _animator.SetBool("IsJumping", isJumping);
+                IsJumping = true;
+                _animator.SetBool("IsJumping", IsJumping);
             }
         }
 
         //  - Update IsAttacking to raise an attack animation
         if (fire1Input != 0)
         {
-            _animator.SetBool("IsAttacking", true);
-            CanAttack = true;
-            ExecuteAfterTime(0.3f, () => { _animator.SetBool("IsAttacking", false); CanAttack = false; });
+            AudioManager.instance.Play("Sardoche");
+            SetAndUnsetAfterMillis("IsAttacking");
         }
 
         //  - Update IsAttackingBig to raise a big attack animation
         if (fire2Input != 0)
         {
-            _animator.SetBool("IsAttackingBig", true);
-            ExecuteAfterTime(0.1f, () => _animator.SetBool("IsAttackingBig", false));
+            SetAndUnsetAfterMillis("IsAttackingBig");
+            AudioManager.instance.Play("Sncf");
         }
 
         //  - Update IsBlocking to raise a defense animation
         if (fire3Input != 0)
-        {
-            _animator.SetBool("IsBlocking", true);
-            IsBlocking = true;
-            ExecuteAfterTime(0.3f, () => { _animator.SetBool("IsBlocking", false);IsBlocking = false; });
-        }
+            SetAndUnsetAfterMillis("IsBlocking");
     }
 
-    private delegate void VoidCallback();
-
-    // Execute some code after time
-    private void ExecuteAfterTime(float time, VoidCallback callback)
+    private void SetAndUnsetAfterMillis(string name)
     {
-        StartCoroutine(_ExecuteAfterTime(time, callback));
-    }
-
-    private IEnumerator _ExecuteAfterTime(float time, VoidCallback callback)
-    {
-        yield return new WaitForSeconds(time);
-        callback();
+        states[name] = true;
+        _animator.SetBool(name, true);
+        StartCoroutine(
+            Util.ExecuteAfterTime(0.3f, () =>
+            {
+                _animator.SetBool(name, false);
+                states[name] = false;
+            })
+        );
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -162,7 +163,7 @@ public class Player : MonoBehaviour
             float direction = collision.transform.position.x - transform.position.x;
             if (collision.gameObject.transform.parent.CompareTag("Ground") && collision.gameObject.transform.position.y < _Transform.position.y)
             {
-                isGrounded = true;
+                IsGrounded = true;
             }
             if (collision.gameObject.transform.parent.CompareTag("Wall") && !velocityChange.Equals(Vector3.zero))
             {
@@ -181,7 +182,7 @@ public class Player : MonoBehaviour
         bool stay = false;
         if (collision.gameObject.transform.parent != null)
         {
-            if (collision.gameObject.transform.parent.CompareTag("Wall") && !velocityChange.Equals(Vector3.zero) && !isGrounded)
+            if (collision.gameObject.transform.parent.CompareTag("Wall") && !velocityChange.Equals(Vector3.zero) && !IsGrounded)
             {
                 //Debug.Log("stay");
                 stay = true;
@@ -190,7 +191,7 @@ public class Player : MonoBehaviour
                 else
                     jumpCollision = -1;
             }
-            if (!isGrounded && stay == false)
+            if (!IsGrounded && stay == false)
             {
                 if (jumpCollision == -1) { transform.position += new Vector3(0.1f, 0, 0); }
                 if (jumpCollision == 1) { transform.position += new Vector3(-0.1f, 0, 0); }
@@ -199,7 +200,7 @@ public class Player : MonoBehaviour
             }
             if (collision.gameObject.transform.parent.CompareTag("Ground") && collision.gameObject.transform.position.y < _Transform.position.y)
             {
-                isGrounded = true;
+                IsGrounded = true;
             }
         }
     }
@@ -210,12 +211,11 @@ public class Player : MonoBehaviour
         {
             if (collision.gameObject.transform.parent.CompareTag("Ground"))
             {
-                isGrounded = false;
+                IsGrounded = false;
             }
             if (collision.gameObject.transform.parent.CompareTag("Wall"))
             {
                 jumpCollision = 0;
-                //Debug.Log("exit");
             }
         }
     }
