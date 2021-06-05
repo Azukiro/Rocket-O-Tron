@@ -34,14 +34,6 @@ public class EnnemiesDetectionAttack : MonoBehaviour
         _Transform = GetComponent<Transform>();
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Destroy(collision.gameObject);
-        }
-    }
-
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
