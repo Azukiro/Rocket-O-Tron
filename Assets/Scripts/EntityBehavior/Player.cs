@@ -12,15 +12,13 @@ public class Player : MonoBehaviour
     [SerializeField] private float _TranslationSpeed;
 
     [SerializeField] private float _JumpSpeed;
-    [SerializeField] private GameObject weapon;
 
     /**
      * States variables
     **/
     private Dictionary<string, bool> states = new Dictionary<string, bool>();
     public bool IsGrounded { get => states["IsGrounded"]; private set => states["IsGrounded"] = value; }
-    public bool IsAttacking { get => states["IsAttacking"]; set => states["IsAttacking"] = value; }
-    public bool IsAttackingBig { get => states["IsAttackingBig"]; set => states["IsAttackingBig"] = value; }
+    public bool CanAttack { get => states["CanAttack"]; private set => states["CanAttack"] = value; }
     public bool IsBlocking { get => states["IsBlocking"]; private set => states["IsBlocking"] = value; }
     public bool IsJumping { get => states["IsJumping"]; private set => states["IsJumping"] = value; }
 
@@ -30,7 +28,6 @@ public class Player : MonoBehaviour
     private Rigidbody _Rigidbody;
     private Transform _Transform;
     private Animator _animator;
-    private WeaponBehaviour weaponBehaviour;
 
     /**
      * Local variables
@@ -38,6 +35,7 @@ public class Player : MonoBehaviour
     private float lastDirection;
     private Vector3 velocityChange;
     private int jumpCollision;
+    private bool onJumpChange = false;
 
     // Start is called before the first frame update
     private void Start()
@@ -46,14 +44,13 @@ public class Player : MonoBehaviour
         _Transform = GetComponent<Transform>();
         _Rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponentInChildren<Animator>();
-        weaponBehaviour = weapon.GetComponent<WeaponBehaviour>();
 
         // Init local variables
         lastDirection = 1;
         IsGrounded = false;
+        CanAttack = false;
         IsBlocking = false;
         IsJumping = false;
-        IsAttacking = false;
     }
 
     private void FixedUpdate()
@@ -76,10 +73,24 @@ public class Player : MonoBehaviour
         }
 
         // Jump the Player
-        if (IsGrounded && jumpInput != 0)
+        if (IsGrounded)
         {
-            Vector3 newJumpVelocity = _Transform.up * _JumpSpeed * jumpInput;
-            _Rigidbody.AddForce(newJumpVelocity, ForceMode.Impulse);
+            if (jumpInput != 0)
+            {
+                // Start of a jump
+                IsJumping = true;
+                onJumpChange = true;
+
+                // Add Jump Force
+                Vector3 newJumpVelocity = _Transform.up * _JumpSpeed * jumpInput;
+                _Rigidbody.AddForce(newJumpVelocity, ForceMode.Impulse);
+            }
+            else if (IsJumping)
+            {
+                // End of a jump
+                IsJumping = false;
+                onJumpChange = true;
+            }
         }
 
         // Jump collisions
@@ -111,51 +122,46 @@ public class Player : MonoBehaviour
         _animator.SetFloat("Speed", xSpeed);
 
         //  - Update IsJumping to raise / stop a jump animation
-        if (IsGrounded)
+        if (onJumpChange)
         {
-            // End of a jump
             if (IsJumping)
             {
-                IsJumping = false;
+                // Start of a jump
                 _animator.SetBool("IsJumping", IsJumping);
+                AudioManager.instance.Play("User jump");
             }
-
-            // Start of a jump
-            if (jumpInput != 0)
+            else
             {
-                IsJumping = true;
+                // End of a jump
                 _animator.SetBool("IsJumping", IsJumping);
             }
+            onJumpChange = false;
         }
 
         //  - Update IsAttacking to raise an attack animation
-        if (fire1Input != 0 && weaponBehaviour.IsAttackReset())
-        {
-            SetAndUnsetAfterMillis("IsAttacking");
-            AudioManager.instance.Play("Sardoche");
-        }
+        if (fire1Input != 0)
+            SetAndUnsetAfterMillis("IsAttacking", "User attack");
 
         //  - Update IsAttackingBig to raise a big attack animation
-        if (fire2Input != 0 && weaponBehaviour.IsBigAttackReset())
-        {
-            SetAndUnsetAfterMillis("IsAttackingBig");
-            AudioManager.instance.Play("Sncf");
-        }
+        if (fire2Input != 0)
+            SetAndUnsetAfterMillis("IsAttackingBig", "User big attack");
 
         //  - Update IsBlocking to raise a defense animation
         if (fire3Input != 0)
-            SetAndUnsetAfterMillis("IsBlocking");
+            SetAndUnsetAfterMillis("IsBlocking", "User block");
     }
 
-    private void SetAndUnsetAfterMillis(string name)
+    private void SetAndUnsetAfterMillis(string animationName, string soundName)
     {
-        states[name] = true;
-        _animator.SetBool(name, true);
+        states[animationName] = true;
+        _animator.SetBool(animationName, true);
+
         StartCoroutine(
-            Util.ExecuteAfterTime(0.5f, () =>
+            Util.ExecuteAfterTime(0.3f, () =>
             {
-                _animator.SetBool(name, false);
-                states[name] = false;
+                AudioManager.instance.Play(soundName);
+                _animator.SetBool(animationName, false);
+                states[animationName] = false;
             })
         );
     }
