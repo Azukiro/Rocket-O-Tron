@@ -21,7 +21,7 @@ public class ParticlesKillPlayer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Destroy(other);
+            other.gameObject.GetComponent<LivingEntity>().Damage(3);
         }
     }
 }
