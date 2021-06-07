@@ -1,12 +1,27 @@
-# Dark Mario Game
+# Dark Mario
 
-## Project members
+## Cadre du projet
+
+Dans le cadre de l'unité **Infographie 3D (Unity I)**, dispensée en 1ère année de cycle ingénieurs à l'ESIEE Paris en filière **Informatique et applications**, nous avons été amené à développer le jeu **Dark Mario**.
+
+|                |Deadline      |Etat         | Version|
+|----------------|------------- |-------------|--------|
+|Début du projet |31 mai 2021   |Réalisé      |-       |
+|Idée du projet  |4 juin 2021   |Réalisé      |2.0     |
+|Rendu du projet |25 juin 2021  |Non réalisé  |1.0     |
+
+## Description du projet
+
+Dark est un **jeu de plateforme** inspiré des univers de Mario bros, de Dark Souls et de Castlevania. Le design repose sur du **Voxel** (cf MagicaVoxel). 
+
+Il s'agit en fait d'un jeu en **3D** dans lequel le joueur incarne **un chevalier** qui doit parcourir **différents univers**. Durant son périple, il doit **se battre** avec des ennemis et être abile afin de gravir différents **obstacles**.
+
+## Membres du projet
 
 - Lucas  BILLARD
 - Ewen   BOUQUET
 - Fabien COURTOIS
 - Loic   FOURNIER
-
 
 ## Song credits
 
