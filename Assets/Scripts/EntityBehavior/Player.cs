@@ -12,13 +12,15 @@ public class Player : MonoBehaviour
     [SerializeField] private float _TranslationSpeed;
 
     [SerializeField] private float _JumpSpeed;
+    [SerializeField] private GameObject weapon;
 
     /**
      * States variables
     **/
     private Dictionary<string, bool> states = new Dictionary<string, bool>();
     public bool IsGrounded { get => states["IsGrounded"]; private set => states["IsGrounded"] = value; }
-    public bool CanAttack { get => states["CanAttack"]; private set => states["CanAttack"] = value; }
+    public bool IsAttacking { get => states["IsAttacking"]; set => states["IsAttacking"] = value; }
+    public bool IsAttackingBig { get => states["IsAttackingBig"]; set => states["IsAttackingBig"] = value; }
     public bool IsBlocking { get => states["IsBlocking"]; private set => states["IsBlocking"] = value; }
     public bool IsJumping { get => states["IsJumping"]; private set => states["IsJumping"] = value; }
 
@@ -28,6 +30,7 @@ public class Player : MonoBehaviour
     private Rigidbody _Rigidbody;
     private Transform _Transform;
     private Animator _animator;
+    private WeaponBehaviour weaponBehaviour;
 
     /**
      * Local variables
@@ -44,13 +47,14 @@ public class Player : MonoBehaviour
         _Transform = GetComponent<Transform>();
         _Rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponentInChildren<Animator>();
+        weaponBehaviour = weapon.GetComponent<WeaponBehaviour>();
 
         // Init local variables
         lastDirection = 1;
         IsGrounded = false;
-        CanAttack = false;
         IsBlocking = false;
         IsJumping = false;
+        IsAttacking = false;
     }
 
     private void FixedUpdate()
@@ -139,11 +143,11 @@ public class Player : MonoBehaviour
         }
 
         //  - Update IsAttacking to raise an attack animation
-        if (fire1Input != 0)
+        if (fire1Input != 0 && weaponBehaviour.IsAttackReset())
             SetAndUnsetAfterMillis("IsAttacking", "User attack");
 
         //  - Update IsAttackingBig to raise a big attack animation
-        if (fire2Input != 0)
+        if (fire2Input != 0 && weaponBehaviour.IsBigAttackReset())
             SetAndUnsetAfterMillis("IsAttackingBig", "User big attack");
 
         //  - Update IsBlocking to raise a defense animation
@@ -157,7 +161,7 @@ public class Player : MonoBehaviour
         _animator.SetBool(animationName, true);
 
         StartCoroutine(
-            Util.ExecuteAfterTime(0.3f, () =>
+            Util.ExecuteAfterTime(0.5f, () =>
             {
                 AudioManager.instance.Play(soundName);
                 _animator.SetBool(animationName, false);
