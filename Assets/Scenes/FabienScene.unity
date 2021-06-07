@@ -130,6 +130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9154913393569746285, guid: fc9aff6107ed0ce4b9addb1e8a919d74, type: 3}
+      propertyPath: m_DrawHalo
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9154913394413823982, guid: fc9aff6107ed0ce4b9addb1e8a919d74, type: 3}
+      propertyPath: m_DrawHalo
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9154913395131513664, guid: fc9aff6107ed0ce4b9addb1e8a919d74, type: 3}
       propertyPath: m_Name
       value: AxeMan
@@ -7649,7 +7657,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1785449560
 Transform:
   m_ObjectHideFlags: 0
