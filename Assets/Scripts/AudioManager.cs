@@ -64,7 +64,7 @@ public class AudioManager : MonoBehaviour
     }
 
     // Play an AudioSource by name
-    // Example : FindObjectOfType<AudioManager>().Play("Name");
+    // Example : AudioManager.instance.Play("Sound Name");
     public void Play(string soundName)
     {
         Sound sound = Array.Find(sounds, sound => sound.name == soundName);
