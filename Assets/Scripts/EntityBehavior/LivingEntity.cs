@@ -26,7 +26,7 @@ public class LivingEntity : MonoBehaviour
     {
         currentLives -= attackDamages;
         DrawLifeBar();
-        if (currentLives == 0)
+        if (currentLives <= 0)
             Kill();
     }
 
