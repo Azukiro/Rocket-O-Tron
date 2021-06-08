@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
 
     public bool IsAttacking { get => states["IsAttacking"]; set => states["IsAttacking"] = value; }
 
-    public bool IsAttackingBig { get => states["IsAttackingBig"]; set => states["IsAttackingBig"] = value; }
+    public bool IsAttackingBig { get => false; set => states["IsAttackingBig"] = value; }
 
     public bool IsBlocking { get => states["IsBlocking"]; private set => states["IsBlocking"] = value; }
 
