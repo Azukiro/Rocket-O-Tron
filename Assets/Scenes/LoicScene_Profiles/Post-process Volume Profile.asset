@@ -18,7 +18,7 @@ MonoBehaviour:
     value: 1
   gradingMode:
     overrideState: 0
-    value: 1
+    value: 0
   externalLut:
     overrideState: 0
     value: {fileID: 0}
@@ -1328,7 +1328,7 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   mode:
-    overrideState: 0
+    overrideState: 1
     value: 0
   color:
     overrideState: 0
@@ -1338,7 +1338,7 @@ MonoBehaviour:
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.258
+    value: 0.342
   smoothness:
     overrideState: 0
     value: 0.207
@@ -1346,14 +1346,14 @@ MonoBehaviour:
     overrideState: 0
     value: 1
   rounded:
-    overrideState: 1
+    overrideState: 0
     value: 1
   mask:
-    overrideState: 1
+    overrideState: 0
     value: {fileID: 0}
     defaultState: 1
   opacity:
-    overrideState: 1
+    overrideState: 0
     value: 1
 --- !u!114 &-4872690523784493714
 MonoBehaviour:
@@ -1373,16 +1373,16 @@ MonoBehaviour:
     value: 1
   mode:
     overrideState: 1
-    value: 0
+    value: 1
   intensity:
     overrideState: 1
-    value: 1.06
+    value: 2.8
   color:
-    overrideState: 0
-    value: {r: 0.1792453, g: 0.16425243, b: 0.125979, a: 1}
-  ambientOnly:
     overrideState: 1
-    value: 1
+    value: {r: 0, g: 0, b: 0, a: 1}
+  ambientOnly:
+    overrideState: 0
+    value: 0
   noiseFilterTolerance:
     overrideState: 1
     value: 0

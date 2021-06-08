@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7027976531949924795}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,9 +41,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7027976532224891271}
   - component: {fileID: 8957955203936970509}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,7 +85,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7027976532691073330}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: IronBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 7027976532824681159}
   - component: {fileID: 7027976532824681161}
   - component: {fileID: 7027976532824681158}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 7027976533183569752}
   - component: {fileID: 7027976533183569754}
   - component: {fileID: 7027976533183569755}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7027976533954370563}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Gfx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
