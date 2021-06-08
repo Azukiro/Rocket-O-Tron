@@ -123,6 +123,183 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 17e0ce542ebb0874180b957349d852d0, type: 2}
+--- !u!1001 &33404958
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4499876733079586656, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499876733079586656, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499876733079586656, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499876733079586656, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499876733079586656, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499876733079586656, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499876733079586656, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499876733079586656, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499876733079586656, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499876733079586656, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499876733079586656, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: sounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 681fcbe904f8c554abfb5e5ebfedc787, type: 3}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[0].name
+      value: Battle Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 99b41c44d567d83478ba526c8e43faca, type: 3}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[1].name
+      value: Cherry Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 075f57606308e6a4987ea6da91230d61, type: 3}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[2].name
+      value: Farming By Moonlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2f4e3f03e16bdc74bb9cc3ca1ba34fae, type: 3}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[3].name
+      value: Ghost Surf Rock
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4f1a5a0b7d76b08479a30e3fdb0c79d5, type: 3}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[4].name
+      value: Maxi Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[0].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[1].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[2].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[3].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[4].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: sounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 24b949ac57acf0e4398c22df7e2865ed, type: 3}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: sounds.Array.data[0].name
+      value: Sardoche
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: sounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7b39c11d06a28f740a25460eff610f6a, type: 3}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: sounds.Array.data[1].name
+      value: Sncf
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[0].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[1].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[2].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[3].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: songs.Array.data[4].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: sounds.Array.data[0].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: sounds.Array.data[1].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599425330688847568, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: sounds.Array.data[1].volume
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6590681598240697915, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: de4a478df5729834180adb3b3ad5cf30, type: 3}
 --- !u!4 &66612378 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5938915917202637392, guid: f913f7a8272bdc94d836894a4ba443ae, type: 3}
@@ -1782,9 +1959,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _TranslationSpeed: 5
   _JumpSpeed: 4
-  isGrounded: 0
-  CanAttack: 0
-  IsBlocking: 0
 --- !u!4 &1048566431 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3948732841852605715, guid: 9467490fd07d4d64b9af978d457e2fdf, type: 3}
