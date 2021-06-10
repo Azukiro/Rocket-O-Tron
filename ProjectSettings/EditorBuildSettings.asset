@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/LoicScene.unity
+    guid: 314a0d6402299c148b3d79e88b801ec0
   m_configObjects: {}
