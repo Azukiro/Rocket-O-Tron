@@ -19,7 +19,7 @@ public class ParticlesKillPlayer : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<LivingEntity>().Damage(3);
         }
