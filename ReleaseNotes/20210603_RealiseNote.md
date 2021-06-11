@@ -8,7 +8,8 @@ Documentation technique de la **version 1.0.5** de **Dark Mario**.
 |Date de diffusion     |25 juin 2021    |Date de rendu du projet                             |
 |Date de la release    |3 juin 2021     |                                                    |
 |Version de la release |Version 1.0.5   |                                                    |
-|Auteur de la release  |Loic FOURNIER   |2D & 3D Gfx Artist / Game/Level Designer            | 
+|Auteur de la release  |Loic FOURNIER   |2D & 3D Gfx Artist / Game/Level Designer            |
+|Auteur de la release  |Fabien COURTOIS |Gameplay Developer / Sound Designer                 | 
 
 ## Description générale
 
