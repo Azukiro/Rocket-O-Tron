@@ -57,6 +57,10 @@ public class Player : MonoBehaviour
 
     private bool onJumpChange = false;
 
+    private float nextJumpTime;
+
+    private float jumpCoolDownDuration;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -74,6 +78,7 @@ public class Player : MonoBehaviour
         IsJumping = false;
         IsAttacking = false;
         IsAttackingBig = false;
+        jumpCoolDownDuration = 1f;
     }
 
     private void FixedUpdate()
@@ -98,14 +103,15 @@ public class Player : MonoBehaviour
         // Jump the Player
         if (IsGrounded)
         {
-            if (jumpInput != 0)
+            if (jumpInput != 0 && nextJumpTime < Time.time)
             {
                 // Start of a jump
                 IsJumping = true;
                 onJumpChange = true;
 
                 // Add Jump Force
-                Jump(jumpInput);
+                Jump(1.5f);
+                nextJumpTime = Time.time + jumpCoolDownDuration;
             }
             else if (IsJumping)
             {
