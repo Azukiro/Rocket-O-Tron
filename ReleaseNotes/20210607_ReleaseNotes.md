@@ -10,6 +10,7 @@ Documentation technique de la **version 1.0.7** de **Dark Mario**.
 |Version de la release |Version 1.0.7   |                                                    |
 |Auteur de la release  |Ewen BOUQUET    |Producer & Graphiste 2D/3D & Music & Sound Designer | 
 |Auteur de la release  |Lucas BILLARD   |Gameplay Developer / Game/Level Designer            |
+|Auteur de la release  |Fabien COURTOIS |Gameplay Developer / Sound Designer                 | 
 |Auteur de la release  |Loic FOURNIER   |2D & 3D Gfx Artist / Game/Level Designer            |
 
 ## Description générale

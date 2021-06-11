@@ -9,7 +9,8 @@ Documentation technique de la **version 1.0.4** de **Dark Mario**.
 |Date de la release    |2 juin 2021     |                                                    |
 |Version de la release |Version 1.0.4   |                                                    |
 |Auteur de la release  |Fabien COURTOIS |Gameplay Developer / Sound Designer                 | 
-|Auteur de la release  |Lucas  BILLARD  |Gameplay Developer / Game/Level Designer            | |Auteur de la release  |Ewen BOUQUET    |Producer & Graphiste 2D/3D & Music & Sound Designer |
+|Auteur de la release  |Lucas  BILLARD  |Gameplay Developer / Game/Level Designer            | 
+|Auteur de la release  |Ewen BOUQUET    |Producer & Graphiste 2D/3D & Music & Sound Designer |
 
 ## Description générale
 
