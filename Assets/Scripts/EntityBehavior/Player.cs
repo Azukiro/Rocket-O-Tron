@@ -43,6 +43,8 @@ public class Player : MonoBehaviour
 
     private WeaponBehaviour weaponBehaviour;
 
+    private LivingEntity livingEntity;
+
     /**
      * Local variables
     **/
@@ -63,6 +65,7 @@ public class Player : MonoBehaviour
         _Rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponentInChildren<Animator>();
         weaponBehaviour = weapon.GetComponent<WeaponBehaviour>();
+        livingEntity = GetComponent<LivingEntity>();
 
         // Init local variables
         lastDirection = 1;
@@ -102,8 +105,7 @@ public class Player : MonoBehaviour
                 onJumpChange = true;
 
                 // Add Jump Force
-                Vector3 newJumpVelocity = _Transform.up * _JumpSpeed * jumpInput;
-                _Rigidbody.AddForce(newJumpVelocity, ForceMode.Impulse);
+                Jump(jumpInput);
             }
             else if (IsJumping)
             {
@@ -121,6 +123,12 @@ public class Player : MonoBehaviour
 
         // Add movement forces
         _Rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
+    }
+
+    private void Jump(float jumpInput)
+    {
+        Vector3 newJumpVelocity = _Transform.up * _JumpSpeed * jumpInput;
+        _Rigidbody.AddForce(newJumpVelocity, ForceMode.Impulse);
     }
 
     private void Update()
@@ -204,6 +212,11 @@ public class Player : MonoBehaviour
                     jumpCollision = -1;
             }
         }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Jump(1f);
+            livingEntity.Damage(1f);
+        }   
     }
 
     private void OnCollisionStay(Collision collision)

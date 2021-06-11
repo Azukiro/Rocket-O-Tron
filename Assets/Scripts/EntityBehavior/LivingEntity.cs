@@ -16,23 +16,28 @@ public class LivingEntity : MonoBehaviour
         lifebar.transform.localScale = new Vector3(0.1f, 0.1f, currentLives / 3);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Damage(float attackDamages)
     {
         currentLives -= attackDamages;
-        DrawLifeBar();
+        DrawLifeBar(true);
         if (currentLives <= 0)
             Kill();
     }
 
-    private void DrawLifeBar()
+    public void Heal(float healing)
     {
-        lifebar.transform.localScale = new Vector3(0.1f,0.1f, lifebar.transform.localScale.z * currentLives / lives);
+        currentLives = currentLives + healing;
+        if (currentLives > lives)
+            currentLives = lives;
+        DrawLifeBar(false);
+    }
+
+    private void DrawLifeBar(bool damage)
+    {
+        if(damage)
+            lifebar.transform.localScale = new Vector3(0.1f,0.1f, lifebar.transform.localScale.z * currentLives / lives);
+        else
+            lifebar.transform.localScale = new Vector3(0.1f, 0.1f, currentLives / lives);
     }
 
     private void Kill()

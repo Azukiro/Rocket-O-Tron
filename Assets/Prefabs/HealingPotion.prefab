@@ -90,6 +90,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5639693338047013650}
+  - component: {fileID: 1008587283}
+  - component: {fileID: 1008587282}
   m_Layer: 0
   m_Name: HealingPotion
   m_TagString: Untagged
@@ -112,6 +114,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1008587283
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696568203109471599}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7040702, y: 1.1993462, z: 0.71418095}
+  m_Center: {x: 0.04846388, y: 0.5996731, z: 0.050220013}
+--- !u!114 &1008587282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696568203109471599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d141c95260c604e9db7571e002d64a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Gfx: {fileID: 8255137794672313972}
 --- !u!1 &8255137794672313972
 GameObject:
   m_ObjectHideFlags: 0

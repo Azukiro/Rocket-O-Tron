@@ -21,7 +21,9 @@ public class ParticlesKillPlayer : MonoBehaviour
     {
         if (other.CompareTag("Player") || other.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<LivingEntity>().Damage(3);
+            LivingEntity livingComponent = other.gameObject.GetComponent<LivingEntity>();
+            if(livingComponent!=null)
+                livingComponent.Damage(3);
         }
     }
 }
