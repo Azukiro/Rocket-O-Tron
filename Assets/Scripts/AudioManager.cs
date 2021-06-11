@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class AudioManager : MonoBehaviour
 {
     // Singleton Pattern
-    public static AudioManager instance;
+    public static AudioManager Instance;
 
     // Unity variables
     [SerializeField] private Sound[] sounds;
@@ -22,8 +22,8 @@ public class AudioManager : MonoBehaviour
     {
         // Singleton Pattern
         DontDestroyOnLoad(gameObject);
-        if (instance == null)
-            instance = this;
+        if (Instance == null)
+            Instance = this;
         else
         {
             Destroy(gameObject);

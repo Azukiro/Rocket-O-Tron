@@ -38,6 +38,7 @@ public class Sound
     // Play the song
     public void Play()
     {
+        source.Stop();
         source.Play();
     }
 }

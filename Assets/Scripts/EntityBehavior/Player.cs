@@ -12,32 +12,47 @@ public class Player : MonoBehaviour
     [SerializeField] private float _TranslationSpeed;
 
     [SerializeField] private float _JumpSpeed;
+
     [SerializeField] private GameObject weapon;
 
     /**
      * States variables
     **/
+
     private Dictionary<string, bool> states = new Dictionary<string, bool>();
+
     public bool IsGrounded { get => states["IsGrounded"]; private set => states["IsGrounded"] = value; }
+
     public bool IsAttacking { get => states["IsAttacking"]; set => states["IsAttacking"] = value; }
+
     public bool IsAttackingBig { get => states["IsAttackingBig"]; set => states["IsAttackingBig"] = value; }
+
     public bool IsBlocking { get => states["IsBlocking"]; private set => states["IsBlocking"] = value; }
+
     public bool IsJumping { get => states["IsJumping"]; private set => states["IsJumping"] = value; }
 
     /**
      * Component variables
     **/
+
     private Rigidbody _Rigidbody;
+
     private Transform _Transform;
+
     private Animator _animator;
+
     private WeaponBehaviour weaponBehaviour;
 
     /**
      * Local variables
     **/
+
     private float lastDirection;
+
     private Vector3 velocityChange;
+
     private int jumpCollision;
+
     private bool onJumpChange = false;
 
     // Start is called before the first frame update
@@ -55,6 +70,7 @@ public class Player : MonoBehaviour
         IsBlocking = false;
         IsJumping = false;
         IsAttacking = false;
+        IsAttackingBig = false;
     }
 
     private void FixedUpdate()
@@ -132,7 +148,7 @@ public class Player : MonoBehaviour
             {
                 // Start of a jump
                 _animator.SetBool("IsJumping", IsJumping);
-                AudioManager.instance.Play("User jump");
+                AudioManager.Instance.Play("User jump");
             }
             else
             {
@@ -163,7 +179,7 @@ public class Player : MonoBehaviour
         StartCoroutine(
             Util.ExecuteAfterTime(0.5f, () =>
             {
-                AudioManager.instance.Play(soundName);
+                AudioManager.Instance.Play(soundName);
                 _animator.SetBool(animationName, false);
                 states[animationName] = false;
             })
@@ -210,6 +226,7 @@ public class Player : MonoBehaviour
                 if (jumpCollision == -1) { transform.position += new Vector3(0.1f, 0, 0); }
                 if (jumpCollision == 1) { transform.position += new Vector3(-0.1f, 0, 0); }
                 jumpCollision = 0;
+
                 //Debug.Log("jumpCollision 0");
             }
             if (collision.gameObject.transform.parent.CompareTag("Ground") && collision.gameObject.transform.position.y < _Transform.position.y)
