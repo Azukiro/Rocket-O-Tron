@@ -75,6 +75,8 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!GameManager.Instance.IsPlaying) return;
+
         // Store user inputs
         float jumpInput = Input.GetAxis("Jump");
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -125,6 +127,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.Instance.IsPlaying) return;
+
         // Animations
         UpdateAnimations();
     }

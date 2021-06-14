@@ -12,14 +12,17 @@ Documentation technique de la **version 1.0.8** de **Dark Mario**.
 
 ## Description générale
 
-Amélioration et finition du dragon.
+Amélioration du dragon (version définitive).
 
 ## Nouveautés
 
 Ce lot de développements inclut la réalisation des tâches suivantes.
 - Amélioration du dragon ;
+
 	>  Gestion de la distance d'attaque ;
+
     >  Animation des différents membres du dragon ;
+    
 	>  Son attaque se déclenche par la présence du joueur mais peut tuer des ennemis sur son passage ;
 
 ## Plus values

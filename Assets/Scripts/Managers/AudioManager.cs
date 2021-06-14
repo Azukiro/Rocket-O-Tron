@@ -6,8 +6,30 @@ using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
-    // Singleton Pattern
-    public static AudioManager Instance;
+    #region Singleton
+
+    private static AudioManager m_Instance;
+
+    public static AudioManager Instance
+    {
+        get { return m_Instance; }
+        private set { }
+    }
+
+    private void Awake()
+    {
+        if (!m_Instance)
+        {
+            m_Instance = this;
+            Init();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    #endregion Singleton
 
     // Unity variables
     [SerializeField] private Sound[] sounds;
@@ -17,20 +39,9 @@ public class AudioManager : MonoBehaviour
     // Song index
     private int songIndex = 0;
 
-    // Initialize all the sounds
-    private void Awake()
+    // Create an AudioSource for each sound and songs
+    private void Init()
     {
-        // Singleton Pattern
-        DontDestroyOnLoad(gameObject);
-        if (Instance == null)
-            Instance = this;
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        // Create an AudioSource for each sound and songs
         // Use of an Action<Sound> to respect the DRY norm
         Action<Sound> initSound = sound => sound.InitSound(gameObject.AddComponent<AudioSource>());
         foreach (Sound sound in sounds) initSound(sound);
