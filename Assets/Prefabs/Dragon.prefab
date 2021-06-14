@@ -114,8 +114,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 22.339924, y: 10, z: 17.145393}
-  m_Center: {x: -6.169962, y: 3, z: 16.427303}
+  m_Size: {x: 33.873405, y: 10, z: 17.145393}
+  m_Center: {x: -11.936704, y: 3, z: 16.427303}
 --- !u!114 &5049928434542138786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4998,6 +4998,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 1011bf11d95d9f848a2913cc3aed94ea, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eb7087526ef52df4987f1f16af323e54, type: 2}
     - target: {fileID: 919132149155446097, guid: 1011bf11d95d9f848a2913cc3aed94ea, type: 3}
       propertyPath: m_Name
       value: dragon_right_wing
@@ -5072,6 +5076,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 68303dd8e4369fd4a808b401036fa3ed, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eb7087526ef52df4987f1f16af323e54, type: 2}
     - target: {fileID: 919132149155446097, guid: 68303dd8e4369fd4a808b401036fa3ed, type: 3}
       propertyPath: m_Name
       value: dragon_left_wing
@@ -5158,6 +5166,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: a702abe207fc38747ae1f904ae603c22, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eb7087526ef52df4987f1f16af323e54, type: 2}
     - target: {fileID: 919132149155446097, guid: a702abe207fc38747ae1f904ae603c22, type: 3}
       propertyPath: m_Name
       value: dragon_upper_mouth
@@ -5232,6 +5244,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 40.851
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 272883d25076bef45a4b22cfa61c1a0c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eb7087526ef52df4987f1f16af323e54, type: 2}
     - target: {fileID: 919132149155446097, guid: 272883d25076bef45a4b22cfa61c1a0c, type: 3}
       propertyPath: m_Name
       value: dragon_right_foot
@@ -5306,6 +5322,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 19.908
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 272883d25076bef45a4b22cfa61c1a0c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eb7087526ef52df4987f1f16af323e54, type: 2}
     - target: {fileID: 919132149155446097, guid: 272883d25076bef45a4b22cfa61c1a0c, type: 3}
       propertyPath: m_Name
       value: dragon_left_foot
@@ -5380,6 +5400,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 26c3fcecaefba114f93277000e91f7a8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eb7087526ef52df4987f1f16af323e54, type: 2}
     - target: {fileID: 919132149155446097, guid: 26c3fcecaefba114f93277000e91f7a8, type: 3}
       propertyPath: m_Name
       value: dragon_body_no_mouth
