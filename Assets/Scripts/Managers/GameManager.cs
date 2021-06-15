@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour, IEventHandler
     {
         get
         {
-            return m_State == GameState.play;
+            return m_State == GameState.play || m_State == GameState.resume;
         }
     }
 
@@ -116,6 +116,11 @@ public class GameManager : MonoBehaviour, IEventHandler
             // Loose condition
             if (TimeBeforeLoose <= CountDown)
                 ChangeState(GameState.gameover);
+
+            // Cancel condition
+            float pauseInput = Input.GetAxis("Cancel");
+            if (pauseInput == 1)
+                EventManager.Instance.Raise(new MenuPauseButtonClickedEvent());
         }
     }
 
@@ -135,22 +140,32 @@ public class GameManager : MonoBehaviour, IEventHandler
 
     public void SubscribeEvents()
     {
+        // Menu buttons
         EventManager.Instance.AddListener<MenuButtonClickedEvent>(MenuButtonClickedEvent);
         EventManager.Instance.AddListener<MenuPlayButtonClickedEvent>(PlayButtonClicked);
+        EventManager.Instance.AddListener<MenuPauseButtonClickedEvent>(MenuPauseButtonClicked);
+        EventManager.Instance.AddListener<MenuNextLevelButtonClickedEvent>(MenuNextLevelButtonClicked);
+        EventManager.Instance.AddListener<MenuResumeButtonClickedEvent>(MenuResumeButtonClicked);
+
+        // Game events
         EventManager.Instance.AddListener<GamePlayerLooseLifeEvent>(GamePlayerLooseLife);
         EventManager.Instance.AddListener<GamePlayerKillEnnemyEvent>(GamePlayerKillEnnemy);
         EventManager.Instance.AddListener<GamePlayerInExitDoorEvent>(GamePlayerInExitDoor);
-        EventManager.Instance.AddListener<MenuNextLevelButtonClickedEvent>(MenuNextLevelButtonClicked);
     }
 
     public void UnsubscribeEvents()
     {
+        // Menu buttons
         EventManager.Instance.RemoveListener<MenuButtonClickedEvent>(MenuButtonClickedEvent);
         EventManager.Instance.RemoveListener<MenuPlayButtonClickedEvent>(PlayButtonClicked);
+        EventManager.Instance.RemoveListener<MenuPauseButtonClickedEvent>(MenuPauseButtonClicked);
+        EventManager.Instance.RemoveListener<MenuNextLevelButtonClickedEvent>(MenuNextLevelButtonClicked);
+        EventManager.Instance.RemoveListener<MenuResumeButtonClickedEvent>(MenuResumeButtonClicked);
+
+        // Game events
         EventManager.Instance.RemoveListener<GamePlayerLooseLifeEvent>(GamePlayerLooseLife);
         EventManager.Instance.RemoveListener<GamePlayerKillEnnemyEvent>(GamePlayerKillEnnemy);
         EventManager.Instance.RemoveListener<GamePlayerInExitDoorEvent>(GamePlayerInExitDoor);
-        EventManager.Instance.RemoveListener<MenuNextLevelButtonClickedEvent>(MenuNextLevelButtonClicked);
     }
 
     private void MenuButtonClickedEvent(MenuButtonClickedEvent e)
@@ -161,6 +176,16 @@ public class GameManager : MonoBehaviour, IEventHandler
     private void PlayButtonClicked(MenuPlayButtonClickedEvent e)
     {
         ChangeState(GameState.play);
+    }
+
+    private void MenuPauseButtonClicked(MenuPauseButtonClickedEvent e)
+    {
+        ChangeState(GameState.pause);
+    }
+
+    private void MenuResumeButtonClicked(MenuResumeButtonClickedEvent e)
+    {
+        ChangeState(GameState.resume);
     }
 
     private void MenuNextLevelButtonClicked(MenuNextLevelButtonClickedEvent e)

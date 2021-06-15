@@ -5,6 +5,7 @@ using SDD.Events;
 
 #region GameManager Events
 
+// Raised by Game Manager
 public class GameMenuEvent : SDD.Events.Event { }
 
 public class GamePlayEvent : SDD.Events.Event { }
@@ -17,17 +18,6 @@ public class GameOverEvent : SDD.Events.Event { }
 
 public class GameVictoryEvent : SDD.Events.Event { }
 
-// Raised by Player
-public class GamePlayerLooseLifeEvent : SDD.Events.Event
-{
-    public int eLife { get; set; }
-}
-
-public class GamePlayerKillEnnemyEvent : SDD.Events.Event { }
-
-public class GamePlayerInExitDoorEvent : SDD.Events.Event { }
-
-// Raised by Game Manager
 public class GameStatisticsChangedEvent : SDD.Events.Event
 {
     public int eScore { get; set; }
@@ -39,8 +29,23 @@ public class GameStatisticsChangedEvent : SDD.Events.Event
 
 #endregion GameManager Events
 
+#region Player Events
+
+// Raised by Player
+public class GamePlayerLooseLifeEvent : SDD.Events.Event
+{
+    public int eLife { get; set; }
+}
+
+public class GamePlayerKillEnnemyEvent : SDD.Events.Event { }
+
+public class GamePlayerInExitDoorEvent : SDD.Events.Event { }
+
+#endregion Player Events
+
 #region MenuManager Events
 
+// Raised by Menu Manager
 public class MenuPlayButtonClickedEvent : SDD.Events.Event
 {
 }
@@ -49,7 +54,15 @@ public class MenuButtonClickedEvent : SDD.Events.Event
 {
 }
 
+public class MenuPauseButtonClickedEvent : SDD.Events.Event
+{
+}
+
 public class MenuNextLevelButtonClickedEvent : SDD.Events.Event
+{
+}
+
+public class MenuResumeButtonClickedEvent : SDD.Events.Event
 {
 }
 
