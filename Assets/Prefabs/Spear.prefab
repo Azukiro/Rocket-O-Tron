@@ -239,6 +239,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Holder: {fileID: 0}
+  attackCoolDownDuration: 1.5
+  bigAttackCoolDownDuration: 0
 --- !u!54 &1398044392771539451
 Rigidbody:
   m_ObjectHideFlags: 0

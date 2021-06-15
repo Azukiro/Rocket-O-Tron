@@ -687,6 +687,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4805960158727711268}
   - component: {fileID: 7744009117383627921}
+  - component: {fileID: 8398223449885370063}
   m_Layer: 0
   m_Name: Gfx
   m_TagString: Untagged
@@ -728,6 +729,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8398223449885370063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7450552841185787858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f162050b7ced68d40a0f8bad9a256a67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _BallPrefab: {fileID: 7993782639545056614, guid: 90c8dca3e96b7d34392acd2f855e7786, type: 3}
+  _BallStartVelocity: 20
+  _BallLifeDuration: 3
+  _BallCoolDownDuration: 3
+  _BallSpawnPosition: {fileID: 7161988754389011245}
+  IsAttacking: 0
 --- !u!1 &8119840196015209898
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,7 +983,6 @@ GameObject:
   - component: {fileID: 9154913395131513671}
   - component: {fileID: 9154913395131513670}
   - component: {fileID: 3621880684063375747}
-  - component: {fileID: 3494291374728610821}
   - component: {fileID: 8516421464481104058}
   - component: {fileID: 8913854663127901107}
   - component: {fileID: 2533727808282141187}
@@ -1035,24 +1053,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3494291374728610821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9154913395131513664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f162050b7ced68d40a0f8bad9a256a67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _BallPrefab: {fileID: 7993782639545056614, guid: 90c8dca3e96b7d34392acd2f855e7786, type: 3}
-  _BallStartVelocity: 20
-  _BallLifeDuration: 3
-  _BallCoolDownDuration: 3
-  _BallSpawnPosition: {fileID: 7161988754389011245}
-  target: {fileID: 0}
 --- !u!114 &8516421464481104058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1067,8 +1067,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MakeRotation: 0
   Direction: 1
+  Freeze: 0
   PlayerDetect: 0
-  OldDirection: 1
   _TranslationSpeed: 1.5
   _Acceleration: 1.5
 --- !u!114 &8913854663127901107
@@ -1084,7 +1084,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanAttack: 0
+  Target: {fileID: 0}
   _Range: 10
+  _AttackSound: Spear launcher attack
 --- !u!114 &2533727808282141187
 MonoBehaviour:
   m_ObjectHideFlags: 0

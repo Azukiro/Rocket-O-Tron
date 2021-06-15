@@ -62,12 +62,36 @@ public class WeaponBehaviour : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Player") && other.isTrigger == false && !other.gameObject.GetComponent<Player>().IsBlocking && nextAttackTime < Time.time)
             {
-                other.gameObject.GetComponent<LivingEntity>().Damage(1);
-                nextAttackTime = Time.time + attackCoolDownDuration;
+                var _EnemyDetectionAttack = GetComponentInParent<EnemyDetectionAttack>();
+                var _EnemyAttackRange = GetComponentInParent<EnemyAttackRange>();
+                if (_EnemyDetectionAttack  != null && _EnemyAttackRange == null)
+                {
+                    Debug.Log("Axeman" + nextAttackTime);
+                    _EnemyDetectionAttack.AttackAnimation();
+                }
+                else
+                {
+
+                Debug.Log("Axeman toto");
+                }
+                StartCoroutine(AnimationAxeMan(other.gameObject));
             }
         }
     }
 
+    private IEnumerator AnimationAxeMan(GameObject otherGameObject)
+    {
+     ;
+        if(otherGameObject != null)
+        {
+            nextAttackTime = Time.time + attackCoolDownDuration;
+            yield return new WaitForSeconds(.5f);
+            otherGameObject.GetComponent<LivingEntity>().Damage(1);
+            Debug.Log("Axeman toto"+ attackCoolDownDuration);
+            
+        }
+       
+    }
     public bool IsBigAttackReset()
     {
         return nextBigAttackTime < Time.time;

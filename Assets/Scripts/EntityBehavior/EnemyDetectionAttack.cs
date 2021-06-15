@@ -10,12 +10,15 @@ public class EnemyDetectionAttack : MonoBehaviour
 
     private Transform _Transform;
 
+    private Animator _animator;
+
     #endregion PrivateFields
 
     #region PublicHideProperties
 
     [HideInInspector]
     public bool CanAttack;
+    public GameObject Target;
 
     #endregion PublicHideProperties
 
@@ -23,6 +26,9 @@ public class EnemyDetectionAttack : MonoBehaviour
 
     [SerializeField]
     private int _Range;
+
+    [SerializeField]
+    private string _AttackSound;
 
     #endregion PrivateSerializeFields
 
@@ -32,16 +38,8 @@ public class EnemyDetectionAttack : MonoBehaviour
     {
         _Movement = GetComponent<EnemyMovement>();
         _Transform = GetComponent<Transform>();
+        _animator = GetComponentInChildren<Animator>();
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            //Destroy(collision.gameObject);
-        }
-    }
-
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -51,6 +49,7 @@ public class EnemyDetectionAttack : MonoBehaviour
             {
                 CanAttack = true;
                 _Movement.Freeze = true;
+                Target = other.gameObject;
             }
             else
             {
@@ -67,7 +66,6 @@ public class EnemyDetectionAttack : MonoBehaviour
             {
                 if (_Movement.Direction == 1)
                 {
-                    Debug.Log("Left");
                     _Movement.Direction *= -1;
                     _Movement.MakeRotation = true;
                 }
@@ -77,7 +75,6 @@ public class EnemyDetectionAttack : MonoBehaviour
                 //If Player right and back of ennemy rotate ennemy
                 if (_Movement.Direction == -1)
                 {
-                    Debug.Log("Right");
                     _Movement.Direction *= -1;
                     _Movement.MakeRotation = true;
                 }
@@ -93,6 +90,19 @@ public class EnemyDetectionAttack : MonoBehaviour
             _Movement.PlayerDetect = false;
             CanAttack = false;
         }
+    }
+
+    public void AttackAnimation()
+    {
+        _animator.SetBool("IsAttacking", true);
+
+        StartCoroutine(
+            Util.ExecuteAfterTime(0.5f, () =>
+            {
+                AudioManager.Instance.Play(_AttackSound);
+                _animator.SetBool("IsAttacking", false);
+            })
+        );
     }
 
     #endregion UnityMethods

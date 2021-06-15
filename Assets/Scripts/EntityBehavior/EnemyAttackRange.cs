@@ -13,7 +13,6 @@ public class EnemyAttackRange : MonoBehaviour
     #endregion PrivateFields
 
     #region PrivateSerializeFields
-
     [Header("Ball")]
     [SerializeField]
     private GameObject _BallPrefab;
@@ -30,37 +29,40 @@ public class EnemyAttackRange : MonoBehaviour
     [SerializeField]
     private Transform _BallSpawnPosition;
 
+
     #endregion PrivateSerializeFields
 
     #region UnityMethods
 
     private void Awake()
     {
-        _DetectionAttack = GetComponent<EnemyDetectionAttack>();
+        _DetectionAttack = GetComponentInParent<EnemyDetectionAttack>();
     }
 
-    public Transform target;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            target = other.transform;
-        }
-    }
+
+
+    public bool IsAttacking;
 
     private void Update()
     {
         if (_DetectionAttack.CanAttack && _BallNextShotTime < Time.time)
         {
-            GameObject newBallGo = Instantiate(_BallPrefab);
-            newBallGo.transform.position = _BallSpawnPosition.position;
-            newBallGo.GetComponent<Projectile>().Target = target;
-            newBallGo.GetComponent<WeaponBehaviour>().Holder = gameObject;
             _BallNextShotTime = Time.time + _BallCoolDownDuration;
-
-            Destroy(newBallGo, _BallLifeDuration);
+            _DetectionAttack.AttackAnimation();
+           
         }
+    }
+
+    public void LaunchSpear()
+    {
+        Debug.Log("LauchSpear");
+        GameObject newBallGo = Instantiate(_BallPrefab);
+        newBallGo.transform.position = _BallSpawnPosition.position;
+        newBallGo.GetComponent<Projectile>().Target = _DetectionAttack.Target.transform;
+        newBallGo.GetComponent<WeaponBehaviour>().Holder = gameObject;
+
+        Destroy(newBallGo, _BallLifeDuration);
     }
 
     #endregion UnityMethods

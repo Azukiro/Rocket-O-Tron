@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class LivingEntity : MonoBehaviour
@@ -16,8 +17,12 @@ public class LivingEntity : MonoBehaviour
         lifebar.transform.localScale = new Vector3(0.1f, 0.1f, currentLives / 3);
     }
 
-    public void Damage(float attackDamages)
+    public void Damage(float attackDamages, [CallerMemberName] string callerName = "")
     {
+        if (gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Lossing"+ currentLives+" "+attackDamages+ " "+ callerName);
+        }
         currentLives -= attackDamages;
         DrawLifeBar(true);
         if (currentLives <= 0)
