@@ -56,11 +56,12 @@ public class EnemyAttackRange : MonoBehaviour
 
     public void LaunchSpear()
     {
-        Debug.Log("LauchSpear");
+        
         GameObject newBallGo = Instantiate(_BallPrefab);
         newBallGo.transform.position = _BallSpawnPosition.position;
-        newBallGo.GetComponent<Projectile>().Target = _DetectionAttack.Target.transform;
-        newBallGo.GetComponent<WeaponBehaviour>().Holder = gameObject;
+        Transform TargetTransform = _DetectionAttack.Target.transform;
+        newBallGo.GetComponent<Projectile>().Target = new Vector3(TargetTransform.position.x, TargetTransform.position.y - 0.5f, TargetTransform.position.z); 
+        newBallGo.GetComponent<WeaponBehaviour>().Holder = gameObject.transform.parent.gameObject;
 
         Destroy(newBallGo, _BallLifeDuration);
     }
