@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour, IEventHandler
     {
         get
         {
-            return m_State == GameState.play;
+            return true;
         }
     }
 

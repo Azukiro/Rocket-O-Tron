@@ -5,7 +5,7 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour
 {
-    public Transform Target;
+    public Vector3 Target;
 
     public float firingAngle = 45.0f;
 
@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         
-        if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Ground"))
+        if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Player"))
         {
             StopAllCoroutines();
             Destroy(gameObject);
@@ -35,7 +35,7 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Player"))
         {
             StopAllCoroutines();
             Destroy(gameObject);
@@ -53,7 +53,7 @@ public class Projectile : MonoBehaviour
         transform.position = myTransform.position + new Vector3(0, 0.0f, 0);
 
         // Calculate distance to target
-        float target_Distance = Vector3.Distance(transform.position, Target.position);
+        float target_Distance = Vector3.Distance(transform.position, Target);
 
         // Calculate the velocity needed to throw the object to the target at specified angle.
         float projectile_Velocity = target_Distance / (Mathf.Sin(2 * firingAngle * Mathf.Deg2Rad) / gravity);
@@ -66,7 +66,7 @@ public class Projectile : MonoBehaviour
         float flightDuration = target_Distance / Vx;
 
         // Rotate projectile to face the target.
-        if (Target.position.x < transform.position.x)
+        if (Target.x < transform.position.x)
             transform.rotation *= Quaternion.Euler(0, 180, 0);//Rotate Gfx
 
         float elapse_time = 0;
