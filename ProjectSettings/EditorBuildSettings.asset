@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LoicScene.unity
     guid: 314a0d6402299c148b3d79e88b801ec0
+  - enabled: 1
+    path: Assets/Scenes/EwenScene.unity
+    guid: 4983f586e47bd834b8364bd15a2c04a0
   m_configObjects: {}

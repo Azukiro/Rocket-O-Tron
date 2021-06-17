@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using SDD.Events;
 
@@ -19,7 +20,11 @@ public class GameManager : MonoBehaviour, IEventHandler
 
     private void Awake()
     {
-        if (!_instance) _instance = this;
+        if (!_instance)
+        {
+            // DontDestroyOnLoad(gameObject);
+            _instance = this;
+        }
         else Destroy(gameObject);
     }
 
@@ -41,6 +46,7 @@ public class GameManager : MonoBehaviour, IEventHandler
 
     private void Start()
     {
+        InitScene();
         InitGame();
         ChangeState(GameState.menu);
     }
@@ -103,6 +109,7 @@ public class GameManager : MonoBehaviour, IEventHandler
         Score = 0;
         CountDown = 0;
         UserLife = 0;
+        UpdateStatistics();
     }
 
     private void Update()
@@ -190,6 +197,7 @@ public class GameManager : MonoBehaviour, IEventHandler
 
     private void MenuNextLevelButtonClicked(MenuNextLevelButtonClickedEvent e)
     {
+        NextScene();
     }
 
     private void GamePlayerLooseLife(GamePlayerLooseLifeEvent e)
@@ -223,4 +231,23 @@ public class GameManager : MonoBehaviour, IEventHandler
     }
 
     #endregion Events
+
+    #region Level Management
+
+    [SerializeField] private List<string> sceneNames;
+    private int sceneIndex;
+
+    private void InitScene()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        sceneIndex = sceneNames.IndexOf(currentSceneName);
+    }
+
+    private void NextScene()
+    {
+        sceneIndex = (sceneIndex + 1) % (sceneNames.Count);
+        SceneManager.LoadScene(sceneNames[sceneIndex]);
+    }
+
+    #endregion Level Management
 }
