@@ -25,22 +25,30 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("StopCorouTrigger" + gameObject.name);
-        StopAllCoroutines();
-        Destroy(gameObject);
+        
+        if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Ground"))
+        {
+            StopAllCoroutines();
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("StopCorouColision");
-        StopAllCoroutines();
-        Destroy(gameObject);
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Ground"))
+        {
+            StopAllCoroutines();
+            Destroy(gameObject);
+        }
     }
 
     private IEnumerator SimulateProjectile()
     {
         // Short delay added before Projectile is thrown
-
+        if(Target == null)
+        {
+            yield return null;
+        }
         // Move projectile to the position of throwing object + add some offset if needed.
         transform.position = myTransform.position + new Vector3(0, 0.0f, 0);
 

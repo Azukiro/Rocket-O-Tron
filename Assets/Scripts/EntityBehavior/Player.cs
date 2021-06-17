@@ -224,8 +224,12 @@ public class Player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Jump(1f);
-            livingEntity.Damage(1f);
+            if(collision.transform.position.y < _Transform.position.y && ! IsGrounded)
+            {
+                Jump(1f);
+                livingEntity.Damage(1f);
+
+            }
         }   
     }
 
