@@ -60,6 +60,7 @@ public class WeaponBehaviour : MonoBehaviour
         //IF ENEMY ATTACKS 
         if (Holder.CompareTag("Enemy"))
         {
+            Debug.Log("Ennemy");
             if (other.gameObject.CompareTag("Player") && other.isTrigger == false && !other.gameObject.GetComponent<Player>().IsBlocking && nextAttackTime < Time.time)
             {
                 var _EnemyDetectionAttack = GetComponentInParent<EnemyDetectionAttack>();
@@ -68,13 +69,15 @@ public class WeaponBehaviour : MonoBehaviour
                 {
                     Debug.Log("Axeman" + nextAttackTime);
                     _EnemyDetectionAttack.AttackAnimation();
+                    StartCoroutine(AnimationAxeMan(other.gameObject));
                 }
                 else
                 {
 
-                Debug.Log("Axeman toto");
+                    nextAttackTime = Time.time + attackCoolDownDuration;
+                    other.gameObject.GetComponent<LivingEntity>().Damage(1);
                 }
-                StartCoroutine(AnimationAxeMan(other.gameObject));
+             
             }
         }
     }
