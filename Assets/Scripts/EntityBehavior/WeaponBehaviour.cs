@@ -6,9 +6,12 @@ public class WeaponBehaviour : MonoBehaviour
 {
     public GameObject Holder;
     private float nextAttackTime;
+
     [SerializeField]
     private float attackCoolDownDuration;
+
     private float nextBigAttackTime;
+
     [SerializeField]
     private float bigAttackCoolDownDuration;
 
@@ -57,44 +60,39 @@ public class WeaponBehaviour : MonoBehaviour
             }
         }
 
-        //IF ENEMY ATTACKS 
+        //IF ENEMY ATTACKS
         if (Holder.CompareTag("Enemy"))
         {
-            Debug.Log("Ennemy");
             if (other.gameObject.CompareTag("Player") && other.isTrigger == false && !other.gameObject.GetComponent<Player>().IsBlocking && nextAttackTime < Time.time)
             {
                 var _EnemyDetectionAttack = GetComponentInParent<EnemyDetectionAttack>();
                 var _EnemyAttackRange = GetComponentInParent<EnemyAttackRange>();
-                if (_EnemyDetectionAttack  != null && _EnemyAttackRange == null)
+                if (_EnemyDetectionAttack != null && _EnemyAttackRange == null)
                 {
-                    Debug.Log("Axeman" + nextAttackTime);
                     _EnemyDetectionAttack.AttackAnimation();
                     StartCoroutine(AnimationAxeMan(other.gameObject));
                 }
                 else
                 {
-
                     nextAttackTime = Time.time + attackCoolDownDuration;
                     other.gameObject.GetComponent<LivingEntity>().Damage(1);
                 }
-             
             }
         }
     }
 
     private IEnumerator AnimationAxeMan(GameObject otherGameObject)
     {
-     ;
-        if(otherGameObject != null)
+        ;
+        if (otherGameObject != null)
         {
             nextAttackTime = Time.time + attackCoolDownDuration;
             yield return new WaitForSeconds(.5f);
             otherGameObject.GetComponent<LivingEntity>().Damage(1);
-            Debug.Log("Axeman toto"+ attackCoolDownDuration);
-            
+            Debug.Log("Axeman toto" + attackCoolDownDuration);
         }
-       
     }
+
     public bool IsBigAttackReset()
     {
         return nextBigAttackTime < Time.time;

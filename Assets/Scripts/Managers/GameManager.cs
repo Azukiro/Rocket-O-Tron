@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using SDD.Events;
 
-public enum GameState { menu, play, pause, resume, goToNextLevel, victory, gameover }
+public enum GameState { starting, menu, play, pause, resume, goToNextLevel, victory, gameover }
 
 public class GameManager : MonoBehaviour, IEventHandler
 {
@@ -21,11 +21,9 @@ public class GameManager : MonoBehaviour, IEventHandler
     private void Awake()
     {
         if (!_instance)
-        {
-            // DontDestroyOnLoad(gameObject);
             _instance = this;
-        }
-        else Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
     #endregion Singleton
@@ -33,10 +31,10 @@ public class GameManager : MonoBehaviour, IEventHandler
     #region States
 
     // The current state of the game
-    private GameState m_State;
+    private GameState m_State = GameState.starting;
 
     // Return True if the player is currently playing
-    public bool IsPlaying
+    private bool IsPlaying
     {
         get
         {
@@ -44,50 +42,86 @@ public class GameManager : MonoBehaviour, IEventHandler
         }
     }
 
-    private void Start()
-    {
-        InitScene();
-        InitGame();
-        ChangeState(GameState.menu);
-    }
-
+    // Change the state of the Game
     private void ChangeState(GameState targetState)
     {
+        // Debug.Log(targetState);
         m_State = targetState;
+
         switch (m_State)
         {
             case GameState.menu:
+                OnMenuState();
                 EventManager.Instance.Raise(new GameMenuEvent());
                 break;
 
             case GameState.play:
-                InitGame();
+                OnPlayState();
                 EventManager.Instance.Raise(new GamePlayEvent());
                 break;
 
             case GameState.pause:
+                OnPauseState();
                 EventManager.Instance.Raise(new GamePauseEvent());
                 break;
 
             case GameState.resume:
+                OnResumeState();
                 EventManager.Instance.Raise(new GameResumeEvent());
                 break;
 
             case GameState.goToNextLevel:
-
+                OnNextLevelState();
                 break;
 
             case GameState.victory:
+                OnVictoryState();
                 EventManager.Instance.Raise(new GameVictoryEvent());
                 break;
 
             case GameState.gameover:
+                OnGameOverState();
                 EventManager.Instance.Raise(new GameOverEvent());
                 break;
 
             default:
                 break;
         }
+    }
+
+    private void OnMenuState()
+    {
+        DisableGameTime();
+    }
+
+    private void OnPlayState()
+    {
+        InitGame();
+        EnableGameTime();
+    }
+
+    private void OnPauseState()
+    {
+        DisableGameTime();
+    }
+
+    private void OnResumeState()
+    {
+        EnableGameTime();
+    }
+
+    private void OnNextLevelState()
+    {
+    }
+
+    private void OnVictoryState()
+    {
+        DisableGameTime();
+    }
+
+    private void OnGameOverState()
+    {
+        DisableGameTime();
     }
 
     #endregion States
@@ -97,13 +131,29 @@ public class GameManager : MonoBehaviour, IEventHandler
     // Max time of a game
     [SerializeField] private int TimeBeforeLoose;
 
-    // The Timer of the game
+    // The HUD time
     private float CountDown;
 
+    // The HUD score
     private int Score;
 
+    // The HUD user life
     private int UserLife;
 
+    private void Start()
+    {
+        // Store the current scene index
+        InitScene();
+
+        // Init the HUD statistics
+        InitGame();
+
+        // If not redo, print the game menu
+        if (m_State == GameState.starting)
+            ChangeState(GameState.menu);
+    }
+
+    // Update the HUD statistics
     private void InitGame()
     {
         Score = 0;
@@ -111,6 +161,9 @@ public class GameManager : MonoBehaviour, IEventHandler
         UserLife = 0;
         UpdateStatistics();
     }
+
+    // Time between two pauses
+    private float pauseCountDown = 0;
 
     private void Update()
     {
@@ -126,8 +179,16 @@ public class GameManager : MonoBehaviour, IEventHandler
 
             // Cancel condition
             float pauseInput = Input.GetAxis("Cancel");
-            if (pauseInput == 1)
+            if (pauseInput == 1 && pauseCountDown == 0)
+            {
+                // Pause
                 EventManager.Instance.Raise(new MenuPauseButtonClickedEvent());
+                pauseCountDown = 1;
+            }
+            else
+            {
+                pauseCountDown = Mathf.Max(0, pauseCountDown - Time.deltaTime);
+            }
         }
     }
 
@@ -150,6 +211,7 @@ public class GameManager : MonoBehaviour, IEventHandler
         // Menu buttons
         EventManager.Instance.AddListener<MenuButtonClickedEvent>(MenuButtonClickedEvent);
         EventManager.Instance.AddListener<MenuPlayButtonClickedEvent>(PlayButtonClicked);
+        EventManager.Instance.AddListener<MenuRePlayButtonClickedEvent>(MenuRePlayButtonClicked);
         EventManager.Instance.AddListener<MenuPauseButtonClickedEvent>(MenuPauseButtonClicked);
         EventManager.Instance.AddListener<MenuNextLevelButtonClickedEvent>(MenuNextLevelButtonClicked);
         EventManager.Instance.AddListener<MenuResumeButtonClickedEvent>(MenuResumeButtonClicked);
@@ -165,6 +227,7 @@ public class GameManager : MonoBehaviour, IEventHandler
         // Menu buttons
         EventManager.Instance.RemoveListener<MenuButtonClickedEvent>(MenuButtonClickedEvent);
         EventManager.Instance.RemoveListener<MenuPlayButtonClickedEvent>(PlayButtonClicked);
+        EventManager.Instance.RemoveListener<MenuRePlayButtonClickedEvent>(MenuRePlayButtonClicked);
         EventManager.Instance.RemoveListener<MenuPauseButtonClickedEvent>(MenuPauseButtonClicked);
         EventManager.Instance.RemoveListener<MenuNextLevelButtonClickedEvent>(MenuNextLevelButtonClicked);
         EventManager.Instance.RemoveListener<MenuResumeButtonClickedEvent>(MenuResumeButtonClicked);
@@ -182,6 +245,13 @@ public class GameManager : MonoBehaviour, IEventHandler
 
     private void PlayButtonClicked(MenuPlayButtonClickedEvent e)
     {
+        ReloadScene();
+        ChangeState(GameState.play);
+    }
+
+    private void MenuRePlayButtonClicked(MenuRePlayButtonClickedEvent e)
+    {
+        ReloadScene();
         ChangeState(GameState.play);
     }
 
@@ -243,6 +313,11 @@ public class GameManager : MonoBehaviour, IEventHandler
         sceneIndex = sceneNames.IndexOf(currentSceneName);
     }
 
+    private void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     private void NextScene()
     {
         sceneIndex = (sceneIndex + 1) % (sceneNames.Count);
@@ -250,4 +325,18 @@ public class GameManager : MonoBehaviour, IEventHandler
     }
 
     #endregion Level Management
+
+    #region Game time
+
+    private void DisableGameTime()
+    {
+        Time.timeScale = 0;
+    }
+
+    private void EnableGameTime()
+    {
+        Time.timeScale = 1;
+    }
+
+    #endregion Game time
 }

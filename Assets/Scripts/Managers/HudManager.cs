@@ -40,9 +40,9 @@ public class HudManager : MonoBehaviour, IEventHandler
     // Update HUD Text Fields
     private void GameStatisticsChanged(GameStatisticsChangedEvent e)
     {
-        m_Score.text = e.eScore.ToString();
-        m_Life.text = e.eLife.ToString();
-        m_Time.text = e.eTime.ToString("N01");
+        m_Score.text = Mathf.Max(0, e.eScore).ToString();
+        m_Life.text = Mathf.Max(0, e.eLife).ToString();
+        m_Time.text = Mathf.Max(0, e.eTime).ToString("N01");
     }
 
     #endregion Events

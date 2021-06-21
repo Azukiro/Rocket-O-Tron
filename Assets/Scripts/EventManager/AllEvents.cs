@@ -50,6 +50,10 @@ public class MenuPlayButtonClickedEvent : SDD.Events.Event
 {
 }
 
+public class MenuRePlayButtonClickedEvent : SDD.Events.Event
+{
+}
+
 public class MenuButtonClickedEvent : SDD.Events.Event
 {
 }

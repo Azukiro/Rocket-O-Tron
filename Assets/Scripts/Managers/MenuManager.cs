@@ -103,6 +103,11 @@ public class MenuManager : MonoBehaviour, IEventHandler
         EventManager.Instance.Raise(new MenuButtonClickedEvent());
     }
 
+    public void MenuRePlayButtonClicked()
+    {
+        EventManager.Instance.Raise(new MenuRePlayButtonClickedEvent());
+    }
+
     public void MenuPauseButtonHasBeenClicked()
     {
         EventManager.Instance.Raise(new MenuPauseButtonClickedEvent());

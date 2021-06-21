@@ -86,8 +86,6 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!GameManager.Instance.IsPlaying) return;
-
         // Store user inputs
         float jumpInput = Input.GetAxis("Jump");
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -144,8 +142,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.Instance.IsPlaying) return;
-
         // Animations
         UpdateAnimations();
     }
@@ -227,13 +223,12 @@ public class Player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            if(collision.transform.position.y < _Transform.position.y && ! IsGrounded)
+            if (collision.transform.position.y < _Transform.position.y && !IsGrounded)
             {
                 Jump(1f);
                 livingEntity.Damage(1f);
-
             }
-        }   
+        }
     }
 
     private void OnCollisionStay(Collision collision)
@@ -245,15 +240,14 @@ public class Player : MonoBehaviour
             if (collision.gameObject.transform.parent.CompareTag("Wall") && !velocityChange.Equals(Vector3.zero) && !IsGrounded)
             {
                 //Debug.Log("stay");
-                
+
                 if (direction > 0)
                     jumpCollision = 1;
                 else
                     jumpCollision = -1;
             }
-            if (!IsGrounded && playerJumpStuck == false && (collision.gameObject.transform.parent.CompareTag("Wall") || collision.gameObject.transform.parent.CompareTag("Ground")) )
+            if (!IsGrounded && playerJumpStuck == false && (collision.gameObject.transform.parent.CompareTag("Wall") || collision.gameObject.transform.parent.CompareTag("Ground")))
             {
-                Debug.Log("stay");
                 playerJumpStuck = true;
                 jumpCollision = 0;
 
