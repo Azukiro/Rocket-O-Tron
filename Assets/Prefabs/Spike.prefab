@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5908854950344212637}
-  - component: {fileID: 136432214}
+  - component: {fileID: 461992160}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Enemy
@@ -113,8 +113,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &136432214
-MeshCollider:
+--- !u!65 &461992160
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -123,10 +123,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2432090755550338912, guid: 7311dbf0e550eba4b8c42ad1267b0f53, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2.4187393, y: 1.3156996, z: 3.02386}
+  m_Center: {x: -0.0023994446, y: 0.6506753, z: -1.5043626}
 --- !u!1 &7358226612528191303
 GameObject:
   m_ObjectHideFlags: 0

@@ -61,6 +61,8 @@ public class Player : MonoBehaviour
 
     private float jumpCoolDownDuration;
 
+    private bool playerJumpStuck;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -79,6 +81,7 @@ public class Player : MonoBehaviour
         IsAttacking = false;
         IsAttackingBig = false;
         jumpCoolDownDuration = 1f;
+        playerJumpStuck = false;
     }
 
     private void FixedUpdate()
@@ -124,7 +127,7 @@ public class Player : MonoBehaviour
         }
 
         // Jump collisions
-        if ((jumpCollision == -1 && Mathf.Sign(velocityChange.x) == -1) || (jumpCollision == 1 && Mathf.Sign(velocityChange.x) == 1))
+        if (playerJumpStuck)
         {
             velocityChange.x = 0;
         }
@@ -235,23 +238,23 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
+        playerJumpStuck = false;
         float direction = collision.transform.position.x - transform.position.x;
-        bool stay = false;
         if (collision.gameObject.transform.parent != null)
         {
             if (collision.gameObject.transform.parent.CompareTag("Wall") && !velocityChange.Equals(Vector3.zero) && !IsGrounded)
             {
                 //Debug.Log("stay");
-                stay = true;
+                
                 if (direction > 0)
                     jumpCollision = 1;
                 else
                     jumpCollision = -1;
             }
-            if (!IsGrounded && stay == false)
+            if (!IsGrounded && playerJumpStuck == false && (collision.gameObject.transform.parent.CompareTag("Wall") || collision.gameObject.transform.parent.CompareTag("Ground")) )
             {
-                if (jumpCollision == -1) { transform.position += new Vector3(0.1f, 0, 0); }
-                if (jumpCollision == 1) { transform.position += new Vector3(-0.1f, 0, 0); }
+                Debug.Log("stay");
+                playerJumpStuck = true;
                 jumpCollision = 0;
 
                 //Debug.Log("jumpCollision 0");
@@ -269,11 +272,16 @@ public class Player : MonoBehaviour
         {
             if (collision.gameObject.transform.parent.CompareTag("Ground"))
             {
-                IsGrounded = false;
+                playerJumpStuck = false;
+                if (collision.gameObject.transform.position.y < _Transform.position.y)
+                {
+                    IsGrounded = false;
+                }
             }
             if (collision.gameObject.transform.parent.CompareTag("Wall"))
             {
                 jumpCollision = 0;
+                playerJumpStuck = false;
             }
         }
     }
