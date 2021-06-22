@@ -2,16 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class MyRay
-{
-    public Vector3 Origin;
-
-    public Vector3 Destination;
-
-    public float Range;
-}
-
 public class EnemyMovement : MonoBehaviour
 {
     #region PrivateFields
@@ -71,13 +61,13 @@ public class EnemyMovement : MonoBehaviour
         if (!MakeRotation && !Freeze)
         {
             Vector3 newVelocity = Direction * _Transform.right * _TranslationSpeed;
-            if (PlayerDetect)//Accelerate is player detected
+            if (PlayerDetect)//Accelerate if player detected
             {
                 newVelocity *= _Acceleration;
             }
 
             Vector3 velocityChange = newVelocity - _Rigidbody.velocity;
-            velocityChange.y = 0;
+            velocityChange.y = 0;//For the enemy fall
 
             _Rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
         }
