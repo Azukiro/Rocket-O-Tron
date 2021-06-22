@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-internal class Util
+public class Util
 {
     public delegate void VoidCallback();
 

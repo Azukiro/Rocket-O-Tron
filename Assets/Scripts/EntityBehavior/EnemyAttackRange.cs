@@ -13,22 +13,22 @@ public class EnemyAttackRange : MonoBehaviour
     #endregion PrivateFields
 
     #region PrivateSerializeFields
-    [Header("Ball")]
+
+    [Header("Spear")]
     [SerializeField]
-    private GameObject _BallPrefab;
+    private GameObject _SpearPrefab;
 
     [SerializeField]
-    private float _BallStartVelocity;
+    private float _SpearStartVelocity;
 
     [SerializeField]
-    private float _BallLifeDuration;
+    private float _SpearLifeDuration;
 
     [SerializeField]
-    private float _BallCoolDownDuration;
+    private float _SpearCoolDownDuration;
 
     [SerializeField]
-    private Transform _BallSpawnPosition;
-
+    private Transform _SpearSpawnPosition;
 
     #endregion PrivateSerializeFields
 
@@ -39,31 +39,26 @@ public class EnemyAttackRange : MonoBehaviour
         _DetectionAttack = GetComponentInParent<EnemyDetectionAttack>();
     }
 
-
-
-
     public bool IsAttacking;
 
     private void Update()
     {
         if (_DetectionAttack.CanAttack && _BallNextShotTime < Time.time)
         {
-            _BallNextShotTime = Time.time + _BallCoolDownDuration;
+            _BallNextShotTime = Time.time + _SpearCoolDownDuration;
             _DetectionAttack.AttackAnimation();
-           
         }
     }
 
     public void LaunchSpear()
     {
-        
-        GameObject newBallGo = Instantiate(_BallPrefab);
-        newBallGo.transform.position = _BallSpawnPosition.position;
+        GameObject newBallGo = Instantiate(_SpearPrefab);
+        newBallGo.transform.position = _SpearSpawnPosition.position;
         Transform TargetTransform = _DetectionAttack.Target.transform;
-        newBallGo.GetComponent<Projectile>().Target = new Vector3(TargetTransform.position.x, TargetTransform.position.y - 0.5f, TargetTransform.position.z); 
+        newBallGo.GetComponent<Projectile>().Target = new Vector3(TargetTransform.position.x, TargetTransform.position.y - 0.5f, TargetTransform.position.z);
         newBallGo.GetComponent<WeaponBehaviour>().Holder = gameObject.transform.parent.gameObject;
 
-        Destroy(newBallGo, _BallLifeDuration);
+        Destroy(newBallGo, _SpearLifeDuration);
     }
 
     #endregion UnityMethods
