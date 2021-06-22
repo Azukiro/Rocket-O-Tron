@@ -5,6 +5,8 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour
 {
+    #region PrivateFields
+
     public Vector3 Target;
 
     public float firingAngle = 45.0f;
@@ -13,9 +15,11 @@ public class Projectile : MonoBehaviour
 
     private Transform myTransform;
 
+    #endregion PrivateFields
+
     private void Awake()
     {
-        myTransform = base.transform;
+        myTransform = GetComponent<Transform>();
     }
 
     private void Start()
@@ -25,7 +29,6 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
         if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Player"))
         {
             StopAllCoroutines();
@@ -42,18 +45,22 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///     This is a coroutine for launch the spear with a parabolic movement Source of algotihm : <see href="https://gist.github.com/jackchen1210/61fa983c3089dc4b6d58ff44ec47c540">here</see>
+    /// </summary>
     private IEnumerator SimulateProjectile()
     {
         // Short delay added before Projectile is thrown
-        if(Target == null)
+        if (Target == null)
         {
             yield return null;
         }
+
         // Move projectile to the position of throwing object + add some offset if needed.
-        transform.position = myTransform.position + new Vector3(0, 0.0f, 0);
+        myTransform.position = myTransform.position + new Vector3(0, 0.0f, 0);
 
         // Calculate distance to target
-        float target_Distance = Vector3.Distance(transform.position, Target);
+        float target_Distance = Vector3.Distance(myTransform.position, Target);
 
         // Calculate the velocity needed to throw the object to the target at specified angle.
         float projectile_Velocity = target_Distance / (Mathf.Sin(2 * firingAngle * Mathf.Deg2Rad) / gravity);
@@ -66,14 +73,14 @@ public class Projectile : MonoBehaviour
         float flightDuration = target_Distance / Vx;
 
         // Rotate projectile to face the target.
-        if (Target.x < transform.position.x)
-            transform.rotation *= Quaternion.Euler(0, 180, 0);//Rotate Gfx
+        if (Target.x < myTransform.position.x)
+            myTransform.rotation *= Quaternion.Euler(0, 180, 0);//Rotate Gfx
 
         float elapse_time = 0;
 
         while (true)
         {
-            transform.Translate(Vx * Time.deltaTime, (Vy - (gravity * elapse_time)) * Time.deltaTime, 0);
+            myTransform.Translate(Vx * Time.deltaTime, (Vy - (gravity * elapse_time)) * Time.deltaTime, 0);
 
             elapse_time += Time.deltaTime;
 
