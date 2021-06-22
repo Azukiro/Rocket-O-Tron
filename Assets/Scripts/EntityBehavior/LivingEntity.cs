@@ -24,11 +24,11 @@ public class LivingEntity : MonoBehaviour
 
         if (gameObject.CompareTag("Player"))
         {
-            EventManager.Instance.Raise(new GamePlayerLooseLifeEvent() { eLife = (int)currentLives });
+            EventManager.Instance.Raise(new GamePlayerLooseLifeEvent() { _ELife = (int)currentLives });
             AudioManager.Instance.Play("User loose life");
         }
         else if (gameObject.CompareTag("Enemy") && currentLives <= 0)
-            EventManager.Instance.Raise(new GamePlayerKillEnnemyEvent());
+            EventManager.Instance.Raise(new GamePlayerKillEnemyEvent());
 
         if (currentLives <= 0)
         {

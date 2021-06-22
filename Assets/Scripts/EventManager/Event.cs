@@ -1,8 +1,9 @@
-namespace SDD.Events {
-
-  /// <summary>
-  /// Base event for all EventManager events.
-  /// </summary>
-  public class Event {
-  }
+namespace SDD.Events
+{
+    /// <summary>
+    /// Base event for all EventManager events.
+    /// </summary>
+    public class Event
+    {
+    }
 }

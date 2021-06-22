@@ -1,44 +1,54 @@
 using UnityEngine.Audio;
 using UnityEngine;
 
+/// Class that allows to play a Soung thanks to an AudioClip
+/// Can represent a Sound or a Song
 [System.Serializable]
 public class Sound
 {
-    // Sound name
-    public string name;
+    /// Sound name
+    public string _Name;
 
-    // Sound clip
-    public AudioClip clip;
+    /// Sound clip
+    public AudioClip _Clip;
 
-    // Sound volume
+    /// Sound volume
     [Range(0f, 1f)]
-    public float volume;
+    public float _Volume;
 
-    // Sound pitch
+    /// Sound pitch
     [Range(.1f, 3f)]
-    public float pitch;
+    public float _Pitch;
 
-    // Sound name
-    public bool loop;
+    /// Sound name
+    public bool _Loop;
 
-    // AudioSource instance
+    /// AudioSource instance
     [HideInInspector]
-    private AudioSource source;
+    private AudioSource _Source;
 
-    // Instanciate an AudioSource
+    /// <summary>
+    ///     Instanciate an AudioSource
+    /// </summary>
+    ///
+    /// <param name="audioSource">
+    ///     The AudioSource to instanciate
+    /// </param>
     public void InitSound(AudioSource audioSource)
     {
-        source = audioSource;
-        source.clip = clip;
-        source.volume = volume;
-        source.pitch = pitch;
-        source.loop = loop;
+        _Source = audioSource;
+        _Source.clip = _Clip;
+        _Source.volume = _Volume;
+        _Source.pitch = _Pitch;
+        _Source.loop = _Loop;
     }
 
-    // Play the song
+    /// <summary>
+    ///     Stop and play the AudioSource
+    /// </summary>
     public void Play()
     {
-        source.Stop();
-        source.Play();
+        _Source.Stop();
+        _Source.Play();
     }
 }
