@@ -10,7 +10,7 @@ public class EnemyDetectionAttack : MonoBehaviour
 
     private Transform _Transform;
 
-    private Animator _animator;
+    private Animator _Animator;
 
     #endregion PrivateFields
 
@@ -18,6 +18,8 @@ public class EnemyDetectionAttack : MonoBehaviour
 
     [HideInInspector]
     public bool CanAttack;
+
+    [HideInInspector]
     public GameObject Target;
 
     #endregion PublicHideProperties
@@ -38,8 +40,9 @@ public class EnemyDetectionAttack : MonoBehaviour
     {
         _Movement = GetComponent<EnemyMovement>();
         _Transform = GetComponent<Transform>();
-        _animator = GetComponentInChildren<Animator>();
+        _Animator = GetComponentInChildren<Animator>();
     }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -92,15 +95,22 @@ public class EnemyDetectionAttack : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///     Execute the attack animantion of an ennemy, with is sound attack
+    /// </summary>
+    ///
+    /// <returns>
+    ///     A boolean if object is detect
+    /// </returns>
     public void AttackAnimation()
     {
-        _animator.SetBool("IsAttacking", true);
+        _Animator.SetBool("IsAttacking", true);
 
         StartCoroutine(
             Util.ExecuteAfterTime(0.5f, () =>
             {
                 AudioManager.Instance.Play(_AttackSound);
-                _animator.SetBool("IsAttacking", false);
+                _Animator.SetBool("IsAttacking", false);
             })
         );
     }

@@ -8,18 +8,22 @@ public class EnemyAttackRange : MonoBehaviour
 
     private EnemyDetectionAttack _DetectionAttack;
 
-    private float _BallNextShotTime;
+    private float _SpearNextShotTime;
 
     #endregion PrivateFields
+
+    #region PublicHideProperties
+
+    [HideInInspector]
+    public bool IsAttacking;
+
+    #endregion PublicHideProperties
 
     #region PrivateSerializeFields
 
     [Header("Spear")]
     [SerializeField]
     private GameObject _SpearPrefab;
-
-    [SerializeField]
-    private float _SpearStartVelocity;
 
     [SerializeField]
     private float _SpearLifeDuration;
@@ -39,26 +43,29 @@ public class EnemyAttackRange : MonoBehaviour
         _DetectionAttack = GetComponentInParent<EnemyDetectionAttack>();
     }
 
-    public bool IsAttacking;
-
     private void Update()
     {
-        if (_DetectionAttack.CanAttack && _BallNextShotTime < Time.time)
+        if (_DetectionAttack.CanAttack && _SpearNextShotTime < Time.time)
         {
-            _BallNextShotTime = Time.time + _SpearCoolDownDuration;
+            _SpearNextShotTime = Time.time + _SpearCoolDownDuration;
             _DetectionAttack.AttackAnimation();
         }
     }
 
+    /// <summary>
+    ///     Throw the spear with instantiate a spear prefab
+    /// </summary>
     public void LaunchSpear()
     {
-        GameObject newBallGo = Instantiate(_SpearPrefab);
-        newBallGo.transform.position = _SpearSpawnPosition.position;
-        Transform TargetTransform = _DetectionAttack.Target.transform;
-        newBallGo.GetComponent<Projectile>().Target = new Vector3(TargetTransform.position.x, TargetTransform.position.y - 0.5f, TargetTransform.position.z);
-        newBallGo.GetComponent<WeaponBehaviour>().Holder = gameObject.transform.parent.gameObject;
+        GameObject newSpear = Instantiate(_SpearPrefab);
 
-        Destroy(newBallGo, _SpearLifeDuration);
+        newSpear.transform.position = _SpearSpawnPosition.position;
+        Transform TargetTransform = _DetectionAttack.Target.transform;
+
+        newSpear.GetComponent<Projectile>().Target = new Vector3(TargetTransform.position.x, TargetTransform.position.y - 0.5f, TargetTransform.position.z);
+        newSpear.GetComponent<WeaponBehaviour>().Holder = gameObject.transform.parent.gameObject;
+
+        Destroy(newSpear, _SpearLifeDuration);
     }
 
     #endregion UnityMethods

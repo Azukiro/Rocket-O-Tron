@@ -741,11 +741,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f162050b7ced68d40a0f8bad9a256a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _BallPrefab: {fileID: 7993782639545056614, guid: 90c8dca3e96b7d34392acd2f855e7786, type: 3}
-  _BallStartVelocity: 20
-  _BallLifeDuration: 3
-  _BallCoolDownDuration: 3
-  _BallSpawnPosition: {fileID: 7161988754389011245}
+  _SpearPrefab: {fileID: 7993782639545056614, guid: 90c8dca3e96b7d34392acd2f855e7786, type: 3}
+  _SpearStartVelocity: 0
+  _SpearLifeDuration: 3
+  _SpearCoolDownDuration: 3
+  _SpearSpawnPosition: {fileID: 7161988754389011245}
   IsAttacking: 0
 --- !u!1 &8119840196015209898
 GameObject:

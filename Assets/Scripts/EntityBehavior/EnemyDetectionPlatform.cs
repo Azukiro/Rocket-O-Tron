@@ -99,6 +99,29 @@ public class EnemyDetectionPlatform : MonoBehaviour
 
     #region PrivateMethods
 
+    /// <summary>
+    ///     Execute a raycast check of a specific layerMask
+    /// </summary>
+    ///
+    /// <param name="origin">
+    ///     origin of the Raycast
+    /// </param>
+    ///
+    /// <param name="direction">
+    ///     direction of the Raycast
+    /// </param>
+    ///
+    /// <param name="maxDistance">
+    ///     maxDistance of the Raycast
+    /// </param>
+    ///
+    /// <param name="layerMask">
+    ///     layerMask for detection object
+    /// </param>
+    ///
+    /// <returns>
+    ///     A boolean if object is detect
+    /// </returns>
     private bool CheckRaycast(Vector3 origin, Vector3 direction, float maxDistance, LayerMask layerMask)
     {
         return Physics.Raycast(new Ray(origin, direction), maxDistance, layerMask);
