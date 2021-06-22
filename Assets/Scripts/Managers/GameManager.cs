@@ -77,11 +77,13 @@ public class GameManager : MonoBehaviour, IEventHandler
             case GameState.victory:
                 OnVictoryState();
                 EventManager.Instance.Raise(new GameVictoryEvent());
+                EventManager.Instance.Raise(new GameBestScoreEvent() { eBestScore = BestScore() });
                 break;
 
             case GameState.gameover:
                 OnGameOverState();
                 EventManager.Instance.Raise(new GameOverEvent());
+                EventManager.Instance.Raise(new GameBestScoreEvent() { eBestScore = BestScore() });
                 break;
 
             default:
@@ -117,11 +119,13 @@ public class GameManager : MonoBehaviour, IEventHandler
     private void OnVictoryState()
     {
         DisableGameTime();
+        SaveProgression();
     }
 
     private void OnGameOverState()
     {
         DisableGameTime();
+        SaveProgression();
     }
 
     #endregion States
@@ -295,7 +299,6 @@ public class GameManager : MonoBehaviour, IEventHandler
         EventManager.Instance.Raise(new GameStatisticsChangedEvent()
         {
             eScore = Score,
-            eLife = UserLife,
             eTime = CountDown
         });
     }
@@ -305,6 +308,7 @@ public class GameManager : MonoBehaviour, IEventHandler
     #region Level Management
 
     [SerializeField] private List<string> sceneNames;
+
     private int sceneIndex;
 
     private void InitScene()
@@ -322,9 +326,34 @@ public class GameManager : MonoBehaviour, IEventHandler
     {
         sceneIndex = (sceneIndex + 1) % (sceneNames.Count);
         SceneManager.LoadScene(sceneNames[sceneIndex]);
+        SaveProgression();
     }
 
     #endregion Level Management
+
+    #region PlayerPrefs
+
+    private int BestScore()
+    {
+        return PlayerPrefs.HasKey($"Score{sceneIndex}") ? PlayerPrefs.GetInt($"Score{sceneIndex}") : 0;
+    }
+
+    private void SaveProgression()
+    {
+        PlayerPrefs.SetInt("CurrentLevel", sceneIndex);
+
+        int bestScore = BestScore();
+        if (bestScore < Score)
+        {
+            Debug.Log("BestScore" + Score + " " + sceneIndex);
+            PlayerPrefs.SetInt($"Score{sceneIndex}", Score);
+            Debug.Log("Best" + BestScore() + " " + sceneIndex);
+        }
+
+        PlayerPrefs.Save();
+    }
+
+    #endregion PlayerPrefs
 
     #region Game time
 

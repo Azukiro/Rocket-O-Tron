@@ -9,9 +9,6 @@ public class HudManager : MonoBehaviour, IEventHandler
     // Score of the player
     [SerializeField] private Text m_Score;
 
-    // Life of the player
-    [SerializeField] private Text m_Life;
-
     // Temps de jeu
     [SerializeField] private Text m_Time;
 
@@ -41,7 +38,6 @@ public class HudManager : MonoBehaviour, IEventHandler
     private void GameStatisticsChanged(GameStatisticsChangedEvent e)
     {
         m_Score.text = Mathf.Max(0, e.eScore).ToString();
-        m_Life.text = Mathf.Max(0, e.eLife).ToString();
         m_Time.text = Mathf.Max(0, e.eTime).ToString("N01");
     }
 

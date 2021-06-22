@@ -87,6 +87,7 @@ public class MenuManager : MonoBehaviour, IEventHandler
     private void GameVictory(GameVictoryEvent e)
     {
         SetPanel(m_VictoryPanel);
+      
     }
 
     #endregion Events

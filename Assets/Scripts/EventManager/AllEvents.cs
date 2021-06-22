@@ -18,11 +18,14 @@ public class GameOverEvent : SDD.Events.Event { }
 
 public class GameVictoryEvent : SDD.Events.Event { }
 
+public class GameBestScoreEvent : SDD.Events.Event
+{
+    public int eBestScore { get; set; }
+}
+
 public class GameStatisticsChangedEvent : SDD.Events.Event
 {
     public int eScore { get; set; }
-
-    public int eLife { get; set; }
 
     public float eTime { get; set; }
 }
