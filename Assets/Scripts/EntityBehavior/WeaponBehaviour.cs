@@ -76,6 +76,7 @@ public class WeaponBehaviour : MonoBehaviour
                 {
                     nextAttackTime = Time.time + attackCoolDownDuration;
                     other.gameObject.GetComponent<LivingEntity>().Damage(1);
+                    AudioManager.Instance.Play("Axe man attack");
                 }
             }
         }

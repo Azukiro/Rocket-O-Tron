@@ -23,12 +23,25 @@ public class LivingEntity : MonoBehaviour
         DrawLifeBar(true);
 
         if (gameObject.CompareTag("Player"))
+        {
             EventManager.Instance.Raise(new GamePlayerLooseLifeEvent() { eLife = (int)currentLives });
+            AudioManager.Instance.Play("User loose life");
+        }
         else if (gameObject.CompareTag("Enemy") && currentLives <= 0)
             EventManager.Instance.Raise(new GamePlayerKillEnnemyEvent());
 
         if (currentLives <= 0)
+        {
             Kill();
+            if (gameObject.CompareTag("Player"))
+            {
+                AudioManager.Instance.Play("User die");
+            }
+            if (gameObject.CompareTag("Enemy"))
+            {
+                AudioManager.Instance.Play("Axe man die");
+            }
+        }
     }
 
     public void Heal(float healing)
@@ -37,6 +50,7 @@ public class LivingEntity : MonoBehaviour
         if (currentLives > lives)
             currentLives = lives;
         DrawLifeBar(false);
+        AudioManager.Instance.Play("User catch potion");
     }
 
     private void DrawLifeBar(bool damage)

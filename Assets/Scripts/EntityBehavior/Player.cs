@@ -82,6 +82,7 @@ public class Player : MonoBehaviour
         IsAttackingBig = false;
         jumpCoolDownDuration = 1f;
         playerJumpStuck = false;
+        jumpCollision = 0;
     }
 
     private void FixedUpdate()
