@@ -5,7 +5,7 @@ Documentation technique de la **version 1.0.5** de **Dark Mario**.
 |                      |Données         |Commentaire                                         |
 |----------------------|----------------|----------------------------------------------------|
 |Nom du projet         |`"Dark Mario"`  |Inspiré de Dark Souls et de Super Mario             |
-|Date de diffusion     |25 juin 2021    |Date de rendu du projet                             |
+|Date de diffusion     |23 juin 2021    |Date de rendu du projet                             |
 |Date de la release    |3 juin 2021     |                                                    |
 |Version de la release |Version 1.0.5   |                                                    |
 |Auteur de la release  |Loic FOURNIER   |2D & 3D Gfx Artist / Game/Level Designer            |
