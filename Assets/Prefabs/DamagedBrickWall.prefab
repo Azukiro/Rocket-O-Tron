@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5504498105432307778}
   - component: {fileID: 4824025216396160657}
   - component: {fileID: 8205470629985848833}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Gfx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,9 +91,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5938915917202637392}
   - component: {fileID: 223482291484933607}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DamagedBrickWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
