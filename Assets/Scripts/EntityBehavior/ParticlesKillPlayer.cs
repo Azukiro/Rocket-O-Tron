@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class ParticlesKillPlayer : MonoBehaviour
 {
+    /**
+     * Public Fields
+    **/
     public ParticleSystem part;
 
-    // Start is called before the first frame update
+    /**
+     * Functions
+    **/
+
     private void Start()
     {
+        //Get particle system
         part = GetComponent<ParticleSystem>();
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
     }
 
     private void OnParticleCollision(GameObject other)
     {
+        //Kill player or enemies when fire particles collide with
         if (other.CompareTag("Player") || other.CompareTag("Enemy"))
         {
             LivingEntity livingComponent = other.gameObject.GetComponent<LivingEntity>();

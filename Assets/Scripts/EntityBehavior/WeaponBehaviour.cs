@@ -4,33 +4,27 @@ using UnityEngine;
 
 public class WeaponBehaviour : MonoBehaviour
 {
+    /**
+     * Public Fields
+    **/
     public GameObject Holder;
+
+    /**
+     * Private Fields
+    **/
     private float nextAttackTime;
 
+    private float nextBigAttackTime;
+
+    /**
+     * Private Serialize Fields
+    **/
     [SerializeField]
     private float attackCoolDownDuration;
-
-    private float nextBigAttackTime;
 
     [SerializeField]
     private float bigAttackCoolDownDuration;
 
-    private void OnTriggerEnter(Collider other)
-    {/*
-        if (Holder == null)
-        {
-            return;
-        }
-
-        //IF ENEMY ATTACKS
-        if (Holder.CompareTag("Enemy"))
-        {
-            if (other.gameObject.CompareTag("Player") && other.isTrigger == false && !other.gameObject.GetComponent<Player>().IsBlocking)
-            {
-                other.gameObject.GetComponent<LivingEntity>().Damage(1);
-            }
-        }*/
-    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -44,6 +38,7 @@ public class WeaponBehaviour : MonoBehaviour
             //If player touch enemy
             if (other.gameObject.CompareTag("Enemy") && other.isTrigger == false && nextAttackTime < Time.time)
             {
+                //Damage and launch attack countdown
                 other.gameObject.GetComponent<LivingEntity>().Damage(1);
                 nextAttackTime = Time.time + attackCoolDownDuration;
             }
@@ -55,6 +50,7 @@ public class WeaponBehaviour : MonoBehaviour
             //If player touch enemy
             if (other.gameObject.CompareTag("Enemy") && other.isTrigger == false && nextBigAttackTime < Time.time)
             {
+                //Damage and launch big attack countdown
                 other.gameObject.GetComponent<LivingEntity>().Damage(2);
                 nextBigAttackTime = Time.time + bigAttackCoolDownDuration;
             }
@@ -63,8 +59,10 @@ public class WeaponBehaviour : MonoBehaviour
         //IF ENEMY ATTACKS
         if (Holder.CompareTag("Enemy"))
         {
+            //If collide with player and can attack
             if (other.gameObject.CompareTag("Player") && other.isTrigger == false && !other.gameObject.GetComponent<Player>().IsBlocking && nextAttackTime < Time.time)
             {
+                //Attacks
                 var _EnemyDetectionAttack = GetComponentInParent<EnemyDetectionAttack>();
                 var _EnemyAttackRange = GetComponentInParent<EnemyAttackRange>();
                 if (_EnemyDetectionAttack != null && _EnemyAttackRange == null)
@@ -82,23 +80,30 @@ public class WeaponBehaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///     Wait for attack animation
+    /// </summary>
     private IEnumerator AnimationAxeMan(GameObject otherGameObject)
     {
-        ;
         if (otherGameObject != null)
         {
             nextAttackTime = Time.time + attackCoolDownDuration;
             yield return new WaitForSeconds(.5f);
             otherGameObject.GetComponent<LivingEntity>().Damage(1);
-            Debug.Log("Axeman toto" + attackCoolDownDuration);
         }
     }
 
+    /// <summary>
+    ///     Tells if big attack can be used
+    /// </summary>
     public bool IsBigAttackReset()
     {
         return nextBigAttackTime < Time.time;
     }
 
+    /// <summary>
+    ///     Tells if attack can be used
+    /// </summary>
     public bool IsAttackReset()
     {
         return nextAttackTime < Time.time;

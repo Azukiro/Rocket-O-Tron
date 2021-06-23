@@ -22,11 +22,8 @@ public class BestScore : MonoBehaviour, IEventHandler
 
     private void GameBestScore(GameBestScoreEvent e)
     {
-        _BestScore.text = e.eBestScore.ToString();
+        _BestScore.text = e._EBestScore.ToString();
     }
-
-
-
 
     private void OnEnable()
     {
