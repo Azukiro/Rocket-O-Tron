@@ -1536,12 +1536,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd64a1fdba9a4742b0ae056ba774ac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeBeforeLoose: 120
-  sceneNames:
-  - LoicScene
-  - EwenScene
-  - LucasScene
-  - FabienScene
+  _TimeBeforeLoose: 2000
+  _SceneNames: []
 --- !u!1 &8666891500896878756
 GameObject:
   m_ObjectHideFlags: 0
@@ -2427,118 +2423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3cd1db721d57714bb95bed68d0ca45e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - name: Game start
-    clip: {fileID: 8300000, guid: 9da6468e0b9fa754f8680bfdbb2355b2, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  - name: Game victory
-    clip: {fileID: 8300000, guid: 9b2e75eb68ee0dd45b195661001819a0, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  - name: Game defeat
-    clip: {fileID: 8300000, guid: 7db25c2d97bfc174c86589d19339aac7, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  - name: User attack
-    clip: {fileID: 8300000, guid: 4668ad06e116e2a428914ba11d9252ad, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  - name: User big attack
-    clip: {fileID: 8300000, guid: 0c69644d4d5b5e9438a3bb9cdc1fee5d, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  - name: User block
-    clip: {fileID: 8300000, guid: 0e634b32e1d13014281b509eb1ab78a8, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  - name: User catch potion
-    clip: {fileID: 8300000, guid: 249f4aaf921f9864b8efd2ef773a2e07, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  - name: User die
-    clip: {fileID: 8300000, guid: 800e3f68a6288884eae394d1a8506708, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  - name: User jump
-    clip: {fileID: 8300000, guid: dd4b9a1b32f20d543ac7b46b522ff892, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  - name: User loose life
-    clip: {fileID: 8300000, guid: 1f097b9f8eec08d479d05133447482ea, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  - name: Dragon start
-    clip: {fileID: 8300000, guid: 053412d1daad8674b9383dd9bd34914e, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  - name: Dragon end
-    clip: {fileID: 8300000, guid: 82021e6086b39234399998a0844a125c, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  - name: Dragon growl
-    clip: {fileID: 8300000, guid: 45967c17c6e15ae40bf0540298ab92f3, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  - name: Axe man attack
-    clip: {fileID: 8300000, guid: 5b261d44895ff9745a3852247fe42443, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  - name: Axe man die
-    clip: {fileID: 8300000, guid: 01d30a7fb54a1644e9ac27d8b5623667, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  - name: Spear launcher attack
-    clip: {fileID: 8300000, guid: 3288c3033be68024da493ffb57b42a8a, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  - name: Spear launcher die
-    clip: {fileID: 8300000, guid: 68dbe9782a4956a459c4238ddc0caae6, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
-  songs:
-  - name: Battle Metal
-    clip: {fileID: 8300000, guid: 681fcbe904f8c554abfb5e5ebfedc787, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-  - name: Cherry Metal
-    clip: {fileID: 8300000, guid: 99b41c44d567d83478ba526c8e43faca, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-  - name: Farming By Moonlight
-    clip: {fileID: 8300000, guid: 075f57606308e6a4987ea6da91230d61, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-  - name: Ghost Surf Rock
-    clip: {fileID: 8300000, guid: 2f4e3f03e16bdc74bb9cc3ca1ba34fae, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-  - name: Maxi Metal
-    clip: {fileID: 8300000, guid: 4f1a5a0b7d76b08479a30e3fdb0c79d5, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
+  _Sounds: []
+  _Songs: []
 --- !u!1 &8666891501265311061
 GameObject:
   m_ObjectHideFlags: 0
@@ -3253,10 +3139,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 290b4a30c2df2344aa1c4afc42d94594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MainMenuPanel: {fileID: 8666891501955151627}
-  m_PauseMenuPanel: {fileID: 8666891501973205711}
-  m_VictoryPanel: {fileID: 8666891501660978206}
-  m_GameOverPanel: {fileID: 8666891501454221769}
+  _MainMenuPanel: {fileID: 8666891501955151627}
+  _PauseMenuPanel: {fileID: 8666891501973205711}
+  _VictoryPanel: {fileID: 8666891501660978206}
+  _GameOverPanel: {fileID: 8666891501454221769}
 --- !u!1 &8666891501727398345
 GameObject:
   m_ObjectHideFlags: 0
@@ -4200,9 +4086,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6174cb62503c02045a2183d79af29273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Score: {fileID: 8666891500896878754}
-  m_Life: {fileID: 0}
-  m_Time: {fileID: 8666891501993896680}
+  _Score: {fileID: 8666891500896878754}
+  _Time: {fileID: 8666891501993896680}
 --- !u!1 &8666891502221031365
 GameObject:
   m_ObjectHideFlags: 0
