@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2688301638191315586}
   - component: {fileID: 2688301638191315587}
   - component: {fileID: 2688301638191315584}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DamagedBrickGround
   m_TagString: Ground
   m_Icon: {fileID: 0}
