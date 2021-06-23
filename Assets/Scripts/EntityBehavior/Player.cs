@@ -53,8 +53,6 @@ public class Player : MonoBehaviour
 
     private Vector3 velocityChange;
 
-    private int jumpCollision;
-
     private bool onJumpChange = false;
 
     private float nextJumpTime;
@@ -82,7 +80,6 @@ public class Player : MonoBehaviour
         IsAttackingBig = false;
         jumpCoolDownDuration = 1f;
         playerJumpStuck = false;
-        jumpCollision = 0;
     }
 
     private void FixedUpdate()
@@ -147,6 +144,9 @@ public class Player : MonoBehaviour
         UpdateAnimations();
     }
 
+    /// <summary>
+    ///     Animation updates
+    /// </summary>
     private void UpdateAnimations()
     {
         // Store user inputs
@@ -189,6 +189,9 @@ public class Player : MonoBehaviour
             SetAndUnsetAfterMillis("IsBlocking", "User block");
     }
 
+    /// <summary>
+    ///     Animation coroutine
+    /// </summary>
     private void SetAndUnsetAfterMillis(string animationName, string soundName)
     {
         states[animationName] = true;
@@ -206,6 +209,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        //Jump collision behaviour when enter collision
         if (collision.gameObject.transform.parent != null)
         {
             float direction = collision.transform.position.x - transform.position.x;
@@ -213,19 +217,14 @@ public class Player : MonoBehaviour
             {
                 IsGrounded = true;
             }
-            if (collision.gameObject.transform.parent.CompareTag("Wall") && !velocityChange.Equals(Vector3.zero))
-            {
-                //Debug.Log("enter");
-                if (direction > 0)
-                    jumpCollision = 1;
-                else
-                    jumpCollision = -1;
-            }
         }
+
+        //If player touch enemy from above
         if (collision.gameObject.CompareTag("Enemy"))
         {
             if (collision.transform.position.y < _Transform.position.y && !IsGrounded)
             {
+                //Knockback and damage player
                 Jump(1f);
                 livingEntity.Damage(1f);
             }
@@ -234,25 +233,14 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
+        //Jump collision behaviour when stay in collision
         playerJumpStuck = false;
         float direction = collision.transform.position.x - transform.position.x;
         if (collision.gameObject.transform.parent != null)
         {
-            if (collision.gameObject.transform.parent.CompareTag("Wall") && !velocityChange.Equals(Vector3.zero) && !IsGrounded)
-            {
-                //Debug.Log("stay");
-
-                if (direction > 0)
-                    jumpCollision = 1;
-                else
-                    jumpCollision = -1;
-            }
             if (!IsGrounded && playerJumpStuck == false && (collision.gameObject.transform.parent.CompareTag("Wall") || collision.gameObject.transform.parent.CompareTag("Ground")))
             {
                 playerJumpStuck = true;
-                jumpCollision = 0;
-
-                //Debug.Log("jumpCollision 0");
             }
             if (collision.gameObject.transform.parent.CompareTag("Ground") && collision.gameObject.transform.position.y < _Transform.position.y)
             {
@@ -263,6 +251,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
+        //Jump collision behaviour when exit collision
         if (collision.gameObject.transform.parent != null)
         {
             if (collision.gameObject.transform.parent.CompareTag("Ground"))
@@ -275,7 +264,6 @@ public class Player : MonoBehaviour
             }
             if (collision.gameObject.transform.parent.CompareTag("Wall"))
             {
-                jumpCollision = 0;
                 playerJumpStuck = false;
             }
         }
