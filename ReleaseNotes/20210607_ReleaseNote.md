@@ -5,14 +5,13 @@ Documentation technique de la **version 1.0.7** de **Dark Mario**.
 |                      |Données         |Commentaire                                         |
 |----------------------|----------------|----------------------------------------------------|
 |Nom du projet         |`"Dark Mario"`  |Inspiré de Dark Souls et de Super Mario             |
-|Date de diffusion     |25 juin 2021    |Date de rendu du projet                             |
+|Date de diffusion     |23 juin 2021    |Date de rendu du projet                             |
 |Date de la release    |7 juin 2021     |                                                    |
 |Version de la release |Version 1.0.7   |                                                    |
 |Auteur de la release  |Ewen BOUQUET    |Producer & Graphiste 2D/3D & Music & Sound Designer | 
 |Auteur de la release  |Lucas BILLARD   |Gameplay Developer / Game/Level Designer            |
 |Auteur de la release  |Fabien COURTOIS |Gameplay Developer / Sound Designer                 | 
 |Auteur de la release  |Loic FOURNIER   |2D & 3D Gfx Artist / Game/Level Designer            |
-|Auteur de la release  |Fabien COURTOIS |Gameplay Developer / Sound Designer                 |
 
 ## Description générale
 
